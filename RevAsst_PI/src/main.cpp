@@ -5,8 +5,21 @@ int main() {
 	if (gpioInitialise() < 0) 
 	{
 		printf("Doesn't Work");
+		return 1;
+
 	}	
-	else
-		printf("Works");
+	gpioSetMode(LED_PIN, PI_OUTPUT);
+
+    	for (int i = 0; i < 10; ++i) {  // Blink the LED 10 times
+        	
+        gpioWrite(LED_PIN, 1);
+        sleep(1); 
+
+        gpioWrite(LED_PIN, 0);
+        sleep(1);  
+    }
+
+    gpioTerminate();
+		
  
 }
