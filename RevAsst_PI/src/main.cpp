@@ -1,6 +1,7 @@
 #include "main.h"
 #include "pigpio.h"
 #include "unistd.h"
+#include "bluetooth_pi.h"
 const int LED_PIN = 2;
 int main() {
 	
@@ -22,6 +23,9 @@ int main() {
     }
 
     gpioTerminate();
+    bluetooth_tester();
+
+
 		
  
 }
