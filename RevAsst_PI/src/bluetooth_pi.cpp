@@ -1,4 +1,4 @@
-#include "bluetooth.h"
+#include "bluetooth_pi.h"
 
 int bluetooth_tester(){
     // Open a Bluetooth socket
