@@ -1,5 +1,7 @@
 #include "main.h"
 #include "pigpio.h"
+#include "unistd.h"
+const int LED_PIN = 2;
 int main() {
 	
 	if (gpioInitialise() < 0) 
