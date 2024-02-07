@@ -1,27 +1,41 @@
-TARGET = RUN_APP
+TARGET = my_program
+SRC_DIR = src
+INCLUDE_DIR = include
+OBJ_DIR = obj
 
-SRCS = src/main.cpp src/bluetooth_pi.cpp
-OBJS = $(SRCS:.cpp=.o)
-DEPS = Makefile.depend
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
+LIBS = -lpigpio -lrt
+CXXFLAGS = -I$(INCLUDE_DIR)
 
-INCLUDES = -I./include
-CXXFLAGS = -O2 -Wall $(INCLUDES) $(shell pkg-config --cflags libbluetooth)
-LDFLAGS = $(shell pkg-config --libs libbluetooth) -lpigpio
+PIGPIO_INSTALLED := $(shell command -v pigpiod 2> /dev/null)
 
-all: $(TARGET)
+all: install_libs $(TARGET)
 
-$(TARGET): $(OBJS)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJS)
+install_libs:
+ifndef PIGPIO_INSTALLED
+	@echo "Installing pigpio..."
+	@sudo apt-get update
+	@sudo apt-get install pigpio
+	@echo "Starting pigpiod daemon..."
+	@sudo pigpiod
+else
+	@echo "pigpio is already installed."
+endif
+
+$(TARGET): $(OBJ)
+	g++ -o $@ $^ $(LIBS)
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	g++ -c $(CXXFLAGS) -o $@ $<
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
 run: all
-	@./$(TARGET)
-
-.PHONY: depend clean
-depend:
-	$(CXX) $(INCLUDES) -MM $(SRCS) > $(DEPS)
-	@sed -i -E "s/^(.+?).o: ([^ ]+?)\1/\2\1.o: \2\1/g" $(DEPS)
+	./$(TARGET)
 
 clean:
-	$(RM) $(OBJS) $(TARGET)
+	rm -rf $(TARGET) $(OBJ_DIR)
 
--include $(DEPS)
+.PHONY: all install_libs run clean
