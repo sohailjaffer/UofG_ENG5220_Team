@@ -1,19 +1,18 @@
 #include "main.h"
 #include "pigpio.h"
 #include "unistd.h"
-#include "bluetooth_pi.h"
 const int LED_PIN = 2;
 int main() {
 	
 	if (gpioInitialise() < 0) 
 	{
-		printf("Doesn't Work");
+		printf("E");
 		return 1;
 
 	}	
 	gpioSetMode(LED_PIN, PI_OUTPUT);
 
-    	for (int i = 0; i < 10; ++i) {  // Blink the LED 10 times
+    	for (int i = 0; i < 10; ++i) {  
         	
         gpioWrite(LED_PIN, 1);
         sleep(1); 
@@ -23,7 +22,6 @@ int main() {
     }
 
     gpioTerminate();
-    bluetooth_tester();
 
 
 		
