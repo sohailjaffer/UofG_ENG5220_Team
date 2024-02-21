@@ -4,7 +4,7 @@
 
 This project implements a reverse assistance system for a car using ultrasonic sensors, a rotary encoder for wheel speed measurement, and a Raspberry Pi for control. The system records user inputs during forward movement and utilizes this data to assist the car in navigating backward in tight spaces.
 
-this is a pushtest
+
 ## Features
 
 - **Ultrasonic Sensors:** Accurate obstacle detection using ultrasonic sensors for safe navigation.
