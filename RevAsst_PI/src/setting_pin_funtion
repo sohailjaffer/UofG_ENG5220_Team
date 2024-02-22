@@ -1,0 +1,15 @@
+
+namespace Type;
+{
+class unite8_t trigPin = 7;
+class unite8_t echoPin = 4;
+int main()
+{
+  SetupPinFution(trigPin, echoPin);
+  while (ture)
+  {
+    printf("\n %d cm",getCm(trigPin, echoPin));
+    sleep (10000);
+  }
+}
+}
