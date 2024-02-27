@@ -1,0 +1,33 @@
+#include "ultrasound_sensor.h"
+
+
+int TriggerPin = 2;
+int EchoPin= 3
+
+int ultrasound_init(){
+
+    if (gpioInitialise() < 0) 
+	{
+        std::cerr << "pigpio initialization failed" << std::endl;
+		return 1;
+
+	}	
+}
+
+
+double ultrasound_distance(){
+
+    gpioWrite(TriggerPin, 1);
+    gpioDelay(10);
+    gpioWrite(Triggerpin, 0);
+
+    while (gpioRead(EchoPin) == 0);
+    uint32_t startTime = gpioTick();
+
+    while (gpioRead(EchoPin) == 1);
+    uint32_t endTime = gpioTick();
+
+    double distance = static_cast<double>(endTime - startTime) / 58.0;
+
+    return distance;
+}
