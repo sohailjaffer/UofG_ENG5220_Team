@@ -1,6 +1,7 @@
 #include "main.h"
 #include "pigpio.h"
 #include "unistd.h"
+#include "ultrasound_sensor.h"
 const int LED_PIN = 2;
 int main() {
 	
@@ -16,7 +17,7 @@ int main() {
         	
         gpioWrite(LED_PIN, 1);
         sleep(1); 
-
+		double distance= ultrasound_distance(2,3);
         gpioWrite(LED_PIN, 0);
         sleep(1);  
     }

@@ -1,8 +1,8 @@
 #include "ultrasound_sensor.h"
 
 
-int TriggerPin = 2;
-int EchoPin= 3
+//int TriggerPin = 2;
+//int EchoPin= 3
 
 int ultrasound_init(){
 
@@ -15,11 +15,11 @@ int ultrasound_init(){
 }
 
 
-double ultrasound_distance(){
+double ultrasound_distance(int TrigPin,int EchoPin){
 
-    gpioWrite(TriggerPin, 1);
+    gpioWrite(TrigPin, 1);
     gpioDelay(10);
-    gpioWrite(Triggerpin, 0);
+    gpioWrite(TrigPin, 0);
 
     while (gpioRead(EchoPin) == 0);
     uint32_t startTime = gpioTick();
