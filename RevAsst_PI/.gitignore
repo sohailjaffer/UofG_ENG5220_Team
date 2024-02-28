@@ -1,7 +1,12 @@
 # .gitignore
 
 # Build artifacts
-build/
+# Exclude build contents
+/build/*
+
+# Include only the build directory
+!/build
+
 bin/
 *.exe
 *.dll
