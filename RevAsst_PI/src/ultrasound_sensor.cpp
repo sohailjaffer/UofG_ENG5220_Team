@@ -8,7 +8,7 @@ int ultrasound_init(){
 
     if (gpioInitialise() < 0) 
 	{
-        std::cerr << "pigpio initialization failed" << std::endl;
+        // std::cerr << "pigpio initialization failed" << std::endl;
 		return 1;
 
 	}	
