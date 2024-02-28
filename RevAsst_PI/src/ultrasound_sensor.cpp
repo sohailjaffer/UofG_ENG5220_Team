@@ -18,6 +18,8 @@ int ultrasound_init(){
 
 double ultrasound_distance(int TrigPin,int EchoPin){
 
+    int ret= ultrasound_init();
+
     gpioWrite(TrigPin, 1);
     gpioDelay(10);
     gpioWrite(TrigPin, 0);
