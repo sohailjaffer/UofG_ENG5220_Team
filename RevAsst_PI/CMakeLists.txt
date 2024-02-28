@@ -5,7 +5,7 @@ project(RevAsst_Exec)
 include_directories(include)
 
 # Add your source files
-file(GLOB SOURCE_FILES src/*.cpp)
+file(GLOB SOURCE_FILES src/*.cpp src/main.cpp)
 
 # Generate the executable
 add_executable(RevAsst_Exec ${SOURCE_FILES})
