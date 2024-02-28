@@ -24,7 +24,7 @@ int main() {
     }
 
 	double output = ultrasound_distance(2,3);
-	std::cout << "Distance : " << number << std::endl;
+	std::cout << "Distance : " << output << std::endl;
 
     gpioTerminate();
 
