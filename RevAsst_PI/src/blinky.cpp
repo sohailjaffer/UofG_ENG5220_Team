@@ -24,13 +24,11 @@ void test(int LED_PIN)
 
         gpioWrite(LED_PIN, 1);
         sleep(1);
-        double distance = ultrasound_distance(2, 3);
         gpioWrite(LED_PIN, 0);
         sleep(1);
     }
 
-    // double output = ultrasound_distance(2,3);
-    // std::cout << "Distance : " << output << std::endl;
+    
 
     gpioTerminate();
 }
