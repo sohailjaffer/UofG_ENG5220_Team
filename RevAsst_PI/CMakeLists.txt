@@ -1,26 +1,28 @@
 cmake_minimum_required(VERSION 3.12)
 project(RevAsst_Exec)
 
-# Include headers
 include_directories(include)
 
-# Add your source files
 file(GLOB SOURCE_FILES src/*.cpp src/main.cpp)
 
-# Generate the executable
 add_executable(RevAsst_Exec ${SOURCE_FILES})
 
-# Link libraries
 target_link_libraries(RevAsst_Exec pigpio rt)
 
-# Set C++ compiler flags
-target_compile_options(RevAsst_Exec PRIVATE -I${CMAKE_CURRENT_SOURCE_DIR}/include)
+find_package(Bluetooth REQUIRED)
 
-# Specify the build type
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)  # Default to Release if not specified
+if(Bluetooth_FOUND)
+    target_link_libraries(RevAsst_Exec PRIVATE ${Bluetooth_LIBRARIES})
+    include_directories(${Bluetooth_INCLUDE_DIRS})
+else()
+    message(WARNING "Bluetooth libraries not found. Modify as needed.")
 endif()
 
-# Specify the C++ standard
+target_compile_options(RevAsst_Exec PRIVATE -I${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+if(NOT CMAKE_BUILD_TYPE)
+    set(CMAKE_BUILD_TYPE Release)
+endif()
+
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
