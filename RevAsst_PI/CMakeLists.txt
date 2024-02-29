@@ -9,13 +9,13 @@ add_executable(RevAsst_Exec ${SOURCE_FILES})
 
 target_link_libraries(RevAsst_Exec pigpio rt)
 
-find_package(Bluetooth REQUIRED)
-
-if(Bluetooth_FOUND)
-    target_link_libraries(RevAsst_Exec PRIVATE ${Bluetooth_LIBRARIES})
-    include_directories(${Bluetooth_INCLUDE_DIRS})
+# Add Bluetooth flags and libraries manually
+find_library(BLUETOOTH_LIB bluetooth)
+find_library(BLUETOOTH_LIB_NAME NAMES bluetooth)
+if(BLUETOOTH_LIB AND BLUETOOTH_LIB_NAME)
+    target_link_libraries(RevAsst_Exec PRIVATE ${BLUETOOTH_LIB})
 else()
-    message(WARNING "Bluetooth libraries not found. Modify as needed.")
+    message(WARNING "Bluetooth library not found. Modify as needed.")
 endif()
 
 target_compile_options(RevAsst_Exec PRIVATE -I${CMAKE_CURRENT_SOURCE_DIR}/include)
