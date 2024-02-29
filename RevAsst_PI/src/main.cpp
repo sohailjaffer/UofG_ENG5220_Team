@@ -5,10 +5,25 @@
 
 int main() {
 	
-	test(2);
+	//test(2);
 	//changes done on PI to setup github on it 
+
+
+
 	pi_ble_result result =pi_ble_init();
-	pi_ble_scan_print(result);
+
+	 if (result.device_id >= 0 && result.socket >= 0) {
+        pi_ble_scan_print(result);
+       // pi_ble_connection(result);
+		const char* targetDeviceAddress = "88:A3:03:4F:73:8B";
+		//const char* messageToSend = "Hello, Bluetooth World!";
+		pi_ble_connection(result, targetDeviceAddress);
+
+
+
+    } else {
+        // Handle the initialization failure
+    }
 
 
 

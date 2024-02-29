@@ -1,20 +1,26 @@
 #ifndef PI_BLUETOOTH_H
 #define PI_BLUETOOTH_H
 
-    #include <stdio.h>
-    #include "pigpio.h"
+#include <bluetooth/bluetooth.h>
+#include <bluetooth/hci.h>
+#include <bluetooth/hci_lib.h>
+#include <unistd.h>
 
-    #include <bluetooth/bluetooth.h>
-    #include <bluetooth/hci.h>
-    #include <bluetooth/hci_lib.h>
 
-    struct pi_ble_result {
+
+struct pi_ble_result {
     int device_id;
     int socket;
-    };
+};
 
-    extern int pi_ble_init(void);
-    extern void pi_ble_scan_print(void);
-    extern void pi_ble_connection(void);
+struct sockaddr_rc {
+    sa_family_t rc_family;
+    bdaddr_t rc_bdaddr;
+    uint8_t rc_channel;
+};
 
-#endif
+extern pi_ble_result pi_ble_init(void);
+extern void pi_ble_scan_print(const pi_ble_result& result);
+extern void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddress);
+
+#endif // PI_BLUETOOTH_H

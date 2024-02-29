@@ -8,7 +8,7 @@ file(GLOB SOURCE_FILES src/*.cpp src/main.cpp)
 add_executable(RevAsst_Exec ${SOURCE_FILES})
 
 # Link libraries including Bluetooth
-target_link_libraries(RevAsst_Exec PRIVATE pigpio rt libbluetooth)
+target_link_libraries(RevAsst_Exec PRIVATE pigpio rt bluetooth)
 
 target_compile_options(RevAsst_Exec PRIVATE -I${CMAKE_CURRENT_SOURCE_DIR}/include)
 
