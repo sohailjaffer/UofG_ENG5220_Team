@@ -2,11 +2,13 @@
 
 
 
-int pi_ble_init(void){
 
-    int device_id = hci_get_route(nullptr);
-    int socket = hci_open_dev(device_id);
-    return device_id & socket;
+pi_ble_result pi_ble_init(void){
+
+    pi_ble_result result;
+    result.device_id = hci_get_route(nullptr);
+    result.socket = hci_open_dev(device_id);
+    return pi_ble_result;
 }
 
 /**
@@ -14,7 +16,7 @@ int pi_ble_init(void){
  * 
  * 
 */
-void pi_ble_scan_print(void){
+void pi_ble_scan_print(pi_ble_result result){
 
     inquiry_info* devices = nullptr;
     int num_devices = hci_inquiry(device_id, 8, 255, nullptr, &devices, IREQ_CACHE_FLUSH);

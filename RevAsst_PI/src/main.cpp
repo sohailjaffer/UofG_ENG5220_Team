@@ -6,8 +6,11 @@
 int main() {
 	
 	test(2);
-	pi_ble_init();
-	pi_ble_scan_print();
+	
+	pi_ble_result result =pi_ble_init();
+	pi_ble_scan_print(result);
+
+
 
 	// double output = ultrasound_distance(2,3);
     // std::cout << "Distance : " << output << std::endl;
