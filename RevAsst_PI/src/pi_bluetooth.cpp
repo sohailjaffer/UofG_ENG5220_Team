@@ -23,7 +23,7 @@ void pi_ble_scan_print(const pi_ble_result  &result) {
 void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddress) {
     struct sockaddr_rc addr = {0};
     addr.rc_family = AF_BLUETOOTH;
-    addr.rc_channel = result.socket;  // Use the socket from pi_ble_result
+    addr.rc_channel = (uint8_t)1;  // Replace with your desired channel
 
     // Convert the target device address from string to bdaddr_t
     bdaddr_t targetBdaddr;
@@ -43,24 +43,35 @@ void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddr
     // Connection established, send and receive messages
 
     // Get message from user
-    std::cout << "Enter message to send: ";
+    std::cout << "Enter message to send (type 'exit' to close connection): ";
     std::string messageToSend;
-    std::getline(std::cin, messageToSend);
 
-    // Send message
-    write(s, messageToSend.c_str(), messageToSend.size());
+    while (std::getline(std::cin, messageToSend)) {
+        // Check if the user wants to exit
+        if (messageToSend == "exit") {
+            break;
+        }
 
-    // Receive message
-    char receivedMessage[1024];
-    int bytesRead = read(s, receivedMessage, sizeof(receivedMessage));
+        // Send message
+        write(s, messageToSend.c_str(), messageToSend.size());
 
-    if (bytesRead > 0) {
-        receivedMessage[bytesRead] = '\0';  // Null-terminate the received string
-        std::cout << "Received message: " << receivedMessage << std::endl;
-    } else {
-        std::cerr << "Failed to read message" << std::endl;
+        // Receive message
+        char receivedMessage[1024];
+        int bytesRead = read(s, receivedMessage, sizeof(receivedMessage));
+
+        if (bytesRead > 0) {
+            receivedMessage[bytesRead] = '\0';  // Null-terminate the received string
+            std::cout << "Received message: " << receivedMessage << std::endl;
+        } else {
+            std::cerr << "Failed to read message" << std::endl;
+            break;
+        }
+
+        // Prompt for the next message
+        std::cout << "Enter message to send (type 'exit' to close connection): ";
     }
 
-    // Remember to close the socket when done
+    // Close the socket when done
     close(s);
 }
+
