@@ -23,12 +23,13 @@ void pi_ble_scan_print(const pi_ble_result  &result) {
 void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddress) {
     struct sockaddr_rc addr = {0};
     addr.rc_family = AF_BLUETOOTH;
-    addr.rc_channel = (uint8_t)1;  // Replace with your desired channel
 
     // Convert the target device address from string to bdaddr_t
     bdaddr_t targetBdaddr;
     str2ba(targetDeviceAddress, &targetBdaddr);
     addr.rc_bdaddr = targetBdaddr;
+    addr.rc_channel = (uint8_t)1;  // Use channel 1
+
 
     int s = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
     bind(s, (struct sockaddr*)&addr, sizeof(addr));
@@ -74,4 +75,3 @@ void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddr
     // Close the socket when done
     close(s);
 }
-
