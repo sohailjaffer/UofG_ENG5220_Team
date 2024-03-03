@@ -27,5 +27,7 @@ extern bool connectBluetooth(const std::string& deviceAddress, const std::string
 
 extern void pi_ble_scan_print(const pi_ble_result& result);
 extern void pi_ble_connection(const pi_ble_result& result, const char* targetDeviceAddress);
+extern int Bluetooth_Simple_Connect();
+
 
 #endif // PI_BLUETOOTH_H
