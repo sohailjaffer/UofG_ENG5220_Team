@@ -19,9 +19,9 @@ int main() {
 
     	const std::string UID = "00001101-0000-1000-8000-00805F9B34FB";
 		//const char* messageToSend = "Hello, Bluetooth World!";
-		//  pi_ble_connection(result, "C4:6E:33:2C:60:28");
-
-		  bool connStat= connectBluetooth(targetDeviceAddress, UID);
+		//pi_ble_connection(result, "C4:6E:33:2C:60:28");
+        Bluetooth_Simple_Connect();
+		 // bool connStat= connectBluetooth(targetDeviceAddress, UID);
 
 
 
