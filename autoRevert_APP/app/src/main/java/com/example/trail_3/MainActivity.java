@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         View view =super.onCreateView(name, context, attrs);
+       // Toast.makeText(MainActivity.this, "Hello!!", Toast.LENGTH_LONG).show();
+
 
         return view;
     }
