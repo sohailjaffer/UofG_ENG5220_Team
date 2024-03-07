@@ -2,6 +2,7 @@
 #include "ultrasound_sensor.h"
 #include "pi_bluetooth.h"
 #include "blinky.h"
+#include "wifi_pi.h"
 
 int main() {
 	
@@ -29,6 +30,8 @@ int main() {
     } else {
         // Handle the initialization failure
     }
+
+	HelloPI();
 
 	test(16);
 
