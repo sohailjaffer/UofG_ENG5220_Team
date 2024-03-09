@@ -5,3 +5,5 @@
 
 extern int gpio_init(void);
 extern void test(int LED_PIN);
+void testHbridge(void);
+

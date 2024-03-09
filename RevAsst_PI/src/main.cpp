@@ -30,10 +30,10 @@ int main() {
     } else {
         // Handle the initialization failure
     }
+	testHbridge();
+	//HelloPI();
 
-	HelloPI();
-
-	test(16);
+	//test(16);
 
 
 
