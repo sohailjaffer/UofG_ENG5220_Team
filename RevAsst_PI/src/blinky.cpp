@@ -53,25 +53,25 @@ void testHbridge(void){
     gpioSetMode(speedA, PI_OUTPUT);
     gpioSetMode(speedB, PI_OUTPUT);
 
-    // gpioWrite(input1, 1);  // Set input1 to HIGH
-    // gpioWrite(input2, 0);  // Set input2 to LOW
-    // gpioPWM(speedA, 255);  // Set speedA to a value between 0 and 255
+    gpioWrite(input1, 1);  // Set input1 to HIGH
+    gpioWrite(input2, 0);  // Set input2 to LOW
+    gpioPWM(speedA, 255);  // Set speedA to a value between 0 and 255
 
 
-    // gpioWrite(input3, 1);  // Set input1 to HIGH
-    // gpioWrite(input4, 0);  // Set input2 to LOW
-    // gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
+    gpioWrite(input3, 1);  // Set input1 to HIGH
+    gpioWrite(input4, 0);  // Set input2 to LOW
+    gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
 
 
-    // sleep(5);
+     sleep(5);
     
     gpioWrite(input1, 0);  // Set input1 to HIGH
     gpioWrite(input2, 1);  // Set input2 to LOW
     gpioPWM(speedA, 255);  // Set speedA to a value between 0 and 255
 
-    // gpioWrite(input3, 0);  // Set input1 to HIGH
-    // gpioWrite(input4, 1);  // Set input2 to LOW
-    // gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
+    gpioWrite(input3, 0);  // Set input1 to HIGH
+    gpioWrite(input4, 1);  // Set input2 to LOW
+    gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
 
     sleep(10);
 
