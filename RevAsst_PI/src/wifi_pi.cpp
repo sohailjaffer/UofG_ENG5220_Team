@@ -1,4 +1,5 @@
 #include "wifi_pi.h"
+#include "blinky.h"
 
 #define PORT 12345 // Change this to the desired port
 
@@ -79,6 +80,87 @@ void HelloPI(){
     }
 
     
+
+    // Clean up
+    close(clientSocket);
+    close(serverSocket);
+
+}
+
+void DriveCar(){
+
+    int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+
+    struct sockaddr_in serverAddr;
+    serverAddr.sin_family = AF_INET;
+    serverAddr.sin_port = htons(PORT);
+    serverAddr.sin_addr.s_addr = INADDR_ANY;
+
+    bind(serverSocket, (struct sockaddr*)&serverAddr, sizeof(serverAddr));
+    listen(serverSocket, 5);
+
+    std::cout << "Waiting for connection..." << std::endl;
+
+    int clientSocket = accept(serverSocket, NULL, NULL);
+    std::cout << "Client connected." << std::endl;
+
+    char buffer[1024] = {0};
+
+    while (true) {
+        // Receive data from the client
+        ssize_t bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
+
+        if (bytesRead <= 0) {
+            // Connection closed or error occurred
+            std::cout << "Client disconnected." << std::endl;
+            break;
+        }
+
+   // Print the received data
+        std::cout << "Received command: " << buffer << std::endl;
+
+        // Compare the received command
+        if (strcmp(buffer, "$1") == 0) {
+            // Handle $1 command (e.g., call forward(255))
+             gpio_init();
+             forward(255);
+            
+   
+
+
+        } else if (strcmp(buffer, "$2") == 0) {
+            // Handle $2 command (e.g., call backward(255))
+            gpio_init();
+            backward(255);
+         
+            //sleep(0.1);
+           // wait(100);
+        } else if (strcmp(buffer, "$3") == 0) {
+            // Handle $3 command (e.g., call left(255))
+            gpio_init();
+            left(255);
+         
+            //sleep(0.1);
+            //wait(100);
+        } else if (strcmp(buffer, "$4") == 0) {
+            // Handle $4 command (e.g., call right(255))
+            gpio_init();
+            right(255);
+            //sleep(0.1);
+            //wait(100);
+        } else {
+            // Unknown command
+            std::cout << "Unknown command: " << buffer << std::endl;
+        }
+
+
+
+
+        // Process the command as needed...
+
+        // Clear the buffer for the next iteration
+        memset(buffer, 0, sizeof(buffer));
+    }
 
     // Clean up
     close(clientSocket);
