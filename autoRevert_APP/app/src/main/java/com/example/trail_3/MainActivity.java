@@ -13,6 +13,9 @@ public class MainActivity extends AppCompatActivity {
     Button Forward;
     Button Backward;
 
+    Button Stop;
+    Button Reverse;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +26,14 @@ public class MainActivity extends AppCompatActivity {
         Forward = this.findViewById(R.id.button2);
         Backward = this.findViewById(R.id.button4);
 
+        Stop = this.findViewById(R.id.button5);
+        Reverse = this.findViewById(R.id.button6);
+
         Left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
             }
-
-//.
-
-
         });
         Right.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +51,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainActivity.this, "Backward", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        Stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Stop", Toast.LENGTH_SHORT).show();
+            }
+        });
+        Reverse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Reverse", Toast.LENGTH_SHORT).show();
             }
         });
 
