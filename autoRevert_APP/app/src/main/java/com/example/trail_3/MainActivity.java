@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         forwards.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "opi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "left", Toast.LENGTH_SHORT).show();
             }
         });
     }
