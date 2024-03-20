@@ -12,6 +12,13 @@ extern void forward(int speed);
 extern void backward(int speed);
 extern void right(int speed);
 extern void left(int speed);
+
+
+extern void forwardright(int speed);
+extern void forwardleft(int speed);
+extern void backwardleft(int speed);
+extern void backwardright(int speed);
+
 extern void resetMotors();
 void terminateGPIO();
 

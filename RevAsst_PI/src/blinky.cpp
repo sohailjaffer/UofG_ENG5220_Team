@@ -139,15 +139,57 @@ void backward(int speed) {
 }
 
 void left(int speed) {
-    setMotorDirection(input3, input4, speedB, 1, speed);
+    setMotorDirection(input3, input4, speedB, 0, speed);
+
     usleep(100000);
     stopMotor(speedB);
 }
 
 void right(int speed) {
-     setMotorDirection(input3, input4, speedB, 0, speed);
+    setMotorDirection(input3, input4, speedB, 1, speed);
      usleep(100000);
      stopMotor(speedB);
    // testHbridge();
 
+}
+
+void forwardright(int speed){
+
+        setMotorDirection(input1, input2, speedA, 1, speed);
+        setMotorDirection(input3, input4, speedB, 1, speed);
+        usleep(100000);
+        stopMotor(speedB);
+        stopMotor(speedA);
+
+
+    
+}
+
+void forwardleft(int speed){
+        setMotorDirection(input1, input2, speedA, 1, speed);
+        setMotorDirection(input3, input4, speedB, 0, speed);
+        usleep(100000);
+        stopMotor(speedB);
+        stopMotor(speedA);
+    
+}
+
+void backwardright(int speed){
+        setMotorDirection(input1, input2, speedA, 0, speed);
+        setMotorDirection(input3, input4, speedB, 1, speed);
+        usleep(100000);
+        stopMotor(speedB);
+        stopMotor(speedA);
+
+    
+}void backwardleft(int speed){
+
+        setMotorDirection(input1, input2, speedA, 0, speed);
+        setMotorDirection(input3, input4, speedB, 0, speed);
+        usleep(100000);
+        stopMotor(speedB);
+        stopMotor(speedA);
+
+
+    
 }
