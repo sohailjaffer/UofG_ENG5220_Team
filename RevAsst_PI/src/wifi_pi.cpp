@@ -1,5 +1,5 @@
 #include "wifi_pi.h"
-#include "blinky.h"
+#include "MotorController.h"
 
 #define PORT 12345 // Change this to the desired port
 
@@ -107,7 +107,7 @@ void DriveCar(){
     char buffer[1024] = {0};
 
     while (true) {
-        // Receive data from the client
+
         ssize_t bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
 
         if (bytesRead <= 0) {
@@ -185,5 +185,6 @@ void DriveCar(){
     // Clean up
     close(clientSocket);
     close(serverSocket);
+    pthread_exit(NULL);
 
 }
