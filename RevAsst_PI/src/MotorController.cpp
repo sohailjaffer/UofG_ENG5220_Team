@@ -1,6 +1,6 @@
 
 #include "main.h"
-#include "blinky.h"
+#include "MotorController.h"
 
     int input1 = 24;
     int input2 = 23;

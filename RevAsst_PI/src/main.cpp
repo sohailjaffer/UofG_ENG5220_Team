@@ -1,7 +1,7 @@
 #include "main.h"
 #include "ultrasound_sensor.h"
 #include "pi_bluetooth.h"
-#include "blinky.h"
+#include "MotorController.h"
 #include "wifi_pi.h"
 
 int main() {
