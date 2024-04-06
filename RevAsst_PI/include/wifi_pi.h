@@ -6,5 +6,6 @@
 #include <netinet/in.h>
 
 extern void HelloPI();
-extern void DriveCar();
+extern void * DriveCar(void * arg);
+
 

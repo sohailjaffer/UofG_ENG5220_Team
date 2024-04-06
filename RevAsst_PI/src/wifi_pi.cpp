@@ -1,14 +1,13 @@
 #include "wifi_pi.h"
 #include "MotorController.h"
 
-#define PORT 12345 // Change this to the desired port
+#define PORT 12345 
 
-// Function to initialize Wi-Fi using wpa_supplicant
+
 void initWiFi() {
-    // Assuming wpa_supplicant is already installed and configured
-    // You may need to modify this based on your specific Wi-Fi setup
+
     system("wpa_supplicant -B -i wlan0 -c /etc/wpa_supplicant/wpa_supplicant.conf");
-    sleep(5); // Allow time for Wi-Fi initialization
+    sleep(5); 
 }
 
 // Function to connect to a Wi-Fi network
@@ -87,7 +86,7 @@ void HelloPI(){
 
 }
 
-void DriveCar(){
+void * DriveCar(void * arg){
 
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 

@@ -5,6 +5,7 @@
     int input1 = 24;
     int input2 = 23;
     int speedA = 12;
+    int buzzer = 26;
 
     int input3 = 25;
     int input4 = 5;
@@ -104,6 +105,16 @@ void resetMotors(){
    // gpioTerminate();
 }
 
+void beep(int time){
+  
+     gpioSetMode(buzzer, PI_OUTPUT);
+     gpioWrite(buzzer, 1);  // Turn off input1
+     sleep(time);
+     gpioWrite(buzzer, 0);  // Turn off input1
+
+
+}
+
 
 
 
@@ -128,6 +139,8 @@ void stopMotor(int speedPin) {
 
 void forward(int speed) {
     setMotorDirection(input1, input2, speedA, 1, speed);
+    beep(0.1);
+
     usleep(100000);  // Sleep for 1 second (in microseconds)
     stopMotor(speedA);
 }

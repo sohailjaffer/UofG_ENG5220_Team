@@ -20,6 +20,9 @@ extern void backwardleft(int speed);
 extern void backwardright(int speed);
 
 extern void resetMotors();
+
+extern void beep(int time);
+
 void terminateGPIO();
 
 

@@ -3,6 +3,7 @@
 #include "pi_bluetooth.h"
 #include "MotorController.h"
 #include "wifi_pi.h"
+void* acoustic(void* arg);
 
 int main() {
 	
@@ -30,8 +31,18 @@ int main() {
     } else {
         // Handle the initialization failure
     }
-	DriveCar();
 	
+
+	pthread_t thread1, thread2;
+
+	pthread_create(&thread1, NULL, DriveCar, NULL);
+	pthread_create(&thread2, NULL, acoustic, NULL);
+
+
+    // Wait for threads to finish
+    pthread_join(thread1, NULL);
+	pthread_join(thread2, NULL);
+
 
 	//testHbridge();
 	//HelloPI();
@@ -44,4 +55,16 @@ int main() {
     // std::cout << "Distance : " << output << std::endl;
 		
  
+}
+
+void* acoustic(void* arg) {
+   int i=0;
+	while(true){
+
+	  std::cout << "Thead2  : " << i << std::endl;
+		i++;
+		sleep(1);
+
+	}
+    pthread_exit(NULL);
 }
