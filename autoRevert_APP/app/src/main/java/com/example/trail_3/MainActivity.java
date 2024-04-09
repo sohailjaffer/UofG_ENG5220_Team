@@ -11,8 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.TextView;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
 
 public class MainActivity extends AppCompatActivity {
+    private static final String HOST = "192.168.1.104";
+    private static final int PORT = 12345;
+    private Socket socket;
+    private DataOutputStream dataOutputStream;
+
+
     Button Left;
     Button Right;
     Button Forward;
