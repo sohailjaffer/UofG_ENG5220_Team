@@ -9,16 +9,29 @@ void WriteUserData(LogEntry& entry){
         std::cerr << "Error opening user data file" << std::endl;
         return;
     }
-    std::chrono::milliseconds time_diff = getTimeDifference(entry.timestamp);
+    std::chrono::milliseconds time_diff = (entry.timestamp-starttime);
     userInputLog << "Timestamp: " << time_diff.count() << ", Buffer data: " << entry.buffer  << std::endl;
     userInputLog.close();
 
 
 }
-std::chrono::milliseconds getTimeDifference(std::chrono::milliseconds curr_time){
 
-    return curr_time - starttime;
+
+std::vector<std::string> ReadUserData() {
+    std::ifstream userInputLog("UserDataLog.txt");
+    std::vector<std::string> lines;
+
+    if (!userInputLog.is_open()) {
+        std::cerr << "Error opening user data file" << std::endl;
+        return lines;
+    }
+
+    std::string line;
+    while (std::getline(userInputLog, line)) {
+        lines.push_back(line);
+    }
+
+    userInputLog.close();
+    return lines;
 }
-
-
 

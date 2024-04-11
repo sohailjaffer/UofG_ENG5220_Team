@@ -2,6 +2,7 @@
 #include "main.h"
 #include "MotorController.h"
 #include "DataLogger.h"
+#include "autoRevert.h"
 
     int input1 = 24;
     int input2 = 23;
@@ -268,7 +269,15 @@ void MotorCallback(char * buffer){
             starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::high_resolution_clock::now().time_since_epoch());
 
-        }         //test
+        }  
+        else if (strcmp(buffer,"$10")==0){
+
+
+
+            startReversing();
+
+    }  
+        
         
         else {
             // Unknown command
@@ -286,3 +295,4 @@ void MotorCallback(char * buffer){
 
         memset(buffer, 0, sizeof(buffer));
 }
+

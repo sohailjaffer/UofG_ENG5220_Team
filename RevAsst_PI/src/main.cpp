@@ -14,12 +14,12 @@ int main() {
 	pthread_t thread1, thread2;
 
 	pthread_create(&thread1, NULL, ManageCarCommunication, NULL);
-	pthread_create(&thread2, NULL, ultSoundThread, NULL);
+	//pthread_create(&thread2, NULL, ultSoundThread, NULL);
 
 
     // Wait for threads to finish
     pthread_join(thread1, NULL);
-	pthread_join(thread2, NULL);
+ //	pthread_join(thread2, NULL);
 
 
 	//testHbridge();

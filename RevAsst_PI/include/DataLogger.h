@@ -4,6 +4,9 @@
 #include <fstream>
 #include <ctime>
 #include <chrono>
+#include <thread> 
+#include <string>
+#include <vector>
 
 
 struct LogEntry {
@@ -13,4 +16,7 @@ struct LogEntry {
 };
 extern void WriteUserData(LogEntry& entry);
 extern std::chrono::milliseconds starttime;
+extern std::vector<std::string> ReadUserData();
+
 std::chrono::milliseconds getTimeDifference(std::chrono::milliseconds curr_time);
+
