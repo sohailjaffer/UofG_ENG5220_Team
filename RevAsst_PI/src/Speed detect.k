@@ -1,4 +1,4 @@
-include <studio.h>
+#include <studio.h>
 import RPi.GPIO as GPIO
 int flag1 = 0;
 int flag2 = 0;
