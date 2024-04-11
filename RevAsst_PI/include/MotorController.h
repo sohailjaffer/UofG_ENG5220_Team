@@ -25,4 +25,7 @@ extern void beep(int time);
 
 void terminateGPIO();
 
+extern void MotorCallback(char * buffer);
+
+
 

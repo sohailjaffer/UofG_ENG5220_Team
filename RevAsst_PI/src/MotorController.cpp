@@ -206,3 +206,73 @@ void backwardright(int speed){
 
     
 }
+
+void MotorCallback(char * buffer){
+
+
+
+   // Print the received data
+        std::cout << "Received command: " << buffer << std::endl;
+
+        // Compare the received command
+        if (strcmp(buffer, "$1") == 0) {
+            // Handle $1 command (e.g., call forward(255))
+             gpio_init();
+             forward(255);
+
+        } else if (strcmp(buffer, "$2") == 0) {
+            // Handle $2 command (e.g., call backward(255))
+            gpio_init();
+            backward(255);
+         
+            //sleep(0.1);
+           // wait(100);
+        } else if (strcmp(buffer, "$3") == 0) {
+            // Handle $3 command (e.g., call left(255))
+            gpio_init();
+            left(255);
+         
+            //sleep(0.1);
+            //wait(100);
+        } else if (strcmp(buffer, "$4") == 0) {
+            gpio_init();
+            right(255);
+     
+        }else if (strcmp(buffer,"$5")==0){
+
+            gpio_init();
+            forwardright(255);
+
+        } 
+        else if (strcmp(buffer,"$6")==0){
+
+            gpio_init();
+            forwardleft(255);
+
+        } else if (strcmp(buffer,"$7")==0){
+
+            gpio_init();
+            backwardright(255);
+
+        } 
+        else if (strcmp(buffer,"$8")==0){
+
+            gpio_init();
+            backwardleft(255);
+
+        } 
+        //test
+        
+        else {
+            // Unknown command
+            std::cout << "Unknown command: " << buffer << std::endl;
+        }
+
+
+
+
+        // Process the command as needed...
+
+        // Clear the buffer for the next iteration
+        memset(buffer, 0, sizeof(buffer));
+}
