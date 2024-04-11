@@ -4,4 +4,5 @@
 
 extern double ultrasound_distance(int TrigPin,int EchoPin);
 extern int ultrasound_init();
+extern void * ultSoundThread(void * arg);
 
