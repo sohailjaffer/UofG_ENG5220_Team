@@ -12,3 +12,5 @@ struct LogEntry {
     
 };
 extern void WriteUserData(LogEntry& entry);
+extern std::chrono::milliseconds starttime;
+std::chrono::milliseconds getTimeDifference(std::chrono::milliseconds curr_time);

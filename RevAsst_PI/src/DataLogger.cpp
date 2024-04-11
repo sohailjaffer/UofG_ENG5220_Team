@@ -1,6 +1,6 @@
 #include "DataLogger.h"
 
-
+std::chrono::milliseconds starttime{0};
 
 void WriteUserData(LogEntry& entry){
 
@@ -9,13 +9,16 @@ void WriteUserData(LogEntry& entry){
         std::cerr << "Error opening user data file" << std::endl;
         return;
     }
-
-    userInputLog << "Timestamp: " << entry.timestamp.count() << ", Buffer data: " << entry.buffer  << std::endl;
+    std::chrono::milliseconds time_diff = getTimeDifference(entry.timestamp);
+    userInputLog << "Timestamp: " << time_diff.count() << ", Buffer data: " << entry.buffer  << std::endl;
     userInputLog.close();
 
 
 }
+std::chrono::milliseconds getTimeDifference(std::chrono::milliseconds curr_time){
 
+    return curr_time - starttime;
+}
 
 
 

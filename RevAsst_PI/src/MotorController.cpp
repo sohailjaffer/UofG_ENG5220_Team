@@ -262,7 +262,13 @@ void MotorCallback(char * buffer){
             backwardleft(255);
 
         } 
-        //test
+
+         else if (strcmp(buffer,"$9")==0){
+
+            starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::high_resolution_clock::now().time_since_epoch());
+
+        }         //test
         
         else {
             // Unknown command
@@ -274,7 +280,7 @@ void MotorCallback(char * buffer){
         std::strcpy(userLog.buffer, buffer);
         userLog.timestamp =  std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::high_resolution_clock::now().time_since_epoch()
-    );
+         );
 
         WriteUserData(userLog);
 
