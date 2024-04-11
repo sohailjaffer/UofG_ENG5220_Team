@@ -114,7 +114,13 @@ void * ManageCarCommunication(void * arg){
             std::cout << "Client disconnected." << std::endl;
             break;
         }
+
+        char tempbuff[1024];
+        strcpy(tempbuff,buffer);
         MotorCallback(buffer);
+        
+
+        
     }
 
     // Clean up

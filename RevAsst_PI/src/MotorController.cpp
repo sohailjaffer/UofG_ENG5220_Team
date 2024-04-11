@@ -1,6 +1,7 @@
 
 #include "main.h"
 #include "MotorController.h"
+#include "DataLogger.h"
 
     int input1 = 24;
     int input2 = 23;
@@ -212,7 +213,7 @@ void MotorCallback(char * buffer){
 
 
    // Print the received data
-        std::cout << "Received command: " << buffer << std::endl;
+       // std::cout << "Received command: " << buffer << std::endl;
 
         // Compare the received command
         if (strcmp(buffer, "$1") == 0) {
@@ -268,11 +269,14 @@ void MotorCallback(char * buffer){
             std::cout << "Unknown command: " << buffer << std::endl;
         }
 
+        LogEntry userLog;
 
+        std::strcpy(userLog.buffer, buffer);
+        userLog.timestamp =  std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::high_resolution_clock::now().time_since_epoch()
+    );
 
+        WriteUserData(userLog);
 
-        // Process the command as needed...
-
-        // Clear the buffer for the next iteration
         memset(buffer, 0, sizeof(buffer));
 }
