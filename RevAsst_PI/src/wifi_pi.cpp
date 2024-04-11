@@ -86,7 +86,7 @@ void HelloPI(){
 
 }
 
-void * DriveCar(void * arg){
+void * ManageCarCommunication(void * arg){
 
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
 

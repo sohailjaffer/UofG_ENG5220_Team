@@ -13,7 +13,7 @@ int main() {
 
 	pthread_t thread1, thread2;
 
-	pthread_create(&thread1, NULL, DriveCar, NULL);
+	pthread_create(&thread1, NULL, ManageCarCommunication, NULL);
 	pthread_create(&thread2, NULL, ultSoundThread, NULL);
 
 
