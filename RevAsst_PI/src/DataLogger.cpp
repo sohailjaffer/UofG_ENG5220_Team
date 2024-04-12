@@ -35,3 +35,11 @@ std::vector<std::string> ReadUserData() {
     return lines;
 }
 
+
+void deleteFile(const std::string& filename) {
+    if (std::remove(filename.c_str()) != 0) {
+        std::cerr << "Error deleting file: " << filename << std::endl;
+    } else {
+        std::cout << "File deleted successfully: " << filename << std::endl;
+    }
+}

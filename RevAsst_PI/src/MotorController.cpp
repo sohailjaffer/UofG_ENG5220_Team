@@ -265,7 +265,7 @@ void MotorCallback(char * buffer){
         } 
 
          else if (strcmp(buffer,"$9")==0){
-
+            deleteFile("UserDataLog.txt");
             starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::high_resolution_clock::now().time_since_epoch());
 

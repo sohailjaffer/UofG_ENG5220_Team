@@ -17,6 +17,6 @@ struct LogEntry {
 extern void WriteUserData(LogEntry& entry);
 extern std::chrono::milliseconds starttime;
 extern std::vector<std::string> ReadUserData();
-
+extern void deleteFile(const std::string& filename);
 std::chrono::milliseconds getTimeDifference(std::chrono::milliseconds curr_time);
 

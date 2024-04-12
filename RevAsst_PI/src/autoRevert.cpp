@@ -6,6 +6,7 @@
 #include <sstream>
 #include <chrono>
 #include <thread>
+#include "MotorController.h"
 
 int getIntfromStr(const std::string& timestampString) {
     std::string numericPart;
@@ -15,6 +16,20 @@ int getIntfromStr(const std::string& timestampString) {
         }
     }
     return std::stoi(numericPart);
+}
+
+void extractCommand(const std::string& line, char* command) {
+    // Find the position of the first occurrence of "$"
+    size_t pos = line.find("$");
+    if (pos != std::string::npos) {
+        // Copy the substring starting from "$" to the end of the line into the provided char array
+        size_t length = line.copy(command, line.size() - pos, pos);
+        // Add null terminator to the char array
+        command[length] = '\0';
+    } else {
+        // If "$" is not found, set the command as an empty string
+        command[0] = '\0';
+    }
 }
 
 
@@ -39,10 +54,16 @@ void startReversing (){
             std::this_thread::sleep_for(std::chrono::milliseconds(delay-prev_time));
         }
         prev_time= delay;
+        char data[100];
 
+        extractCommand(linedata,data);
+
+        if (data[0] != '\0') {
+            MotorCallback(data);
+        }
         
        
-
+       
 
         // Output data
         std::cout << "Output data: " << linedata << std::endl;
@@ -50,6 +71,8 @@ void startReversing (){
 
 
     }
+    deleteFile("UserDataLog.txt");
+
 
 
 }
