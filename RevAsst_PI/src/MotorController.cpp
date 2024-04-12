@@ -244,24 +244,28 @@ void MotorCallback(char * buffer){
         }else if (strcmp(buffer,"$5")==0){
 
             gpio_init();
-            forwardright(255);
+            backwardright(255);
+
 
         } 
         else if (strcmp(buffer,"$6")==0){
 
             gpio_init();
-            forwardleft(255);
+            backwardleft(255);
+
 
         } else if (strcmp(buffer,"$7")==0){
 
             gpio_init();
-            backwardright(255);
+            forwardright(255);
+
 
         } 
         else if (strcmp(buffer,"$8")==0){
 
             gpio_init();
-            backwardleft(255);
+            forwardleft(255);
+
 
         } 
 
@@ -336,26 +340,30 @@ void ReverseAssistCallback(char * buffer){
         }else if (strcmp(buffer,"$5")==0){
 
             gpio_init();
-            backwardright(255);
+           forwardright(255);
+
 
 
         } 
         else if (strcmp(buffer,"$6")==0){
 
             gpio_init();
-             backwardleft(255);
+            forwardleft(255);
+
 
 
         } else if (strcmp(buffer,"$7")==0){
 
             gpio_init();
-            forwardright(255);
+            backwardright(255);
+
 
         } 
         else if (strcmp(buffer,"$8")==0){
 
             gpio_init();
-            forwardleft(255);
+            backwardleft(255);
+
 
         } 
 
