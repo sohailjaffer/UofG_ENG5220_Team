@@ -5,3 +5,6 @@
 #include "unistd.h"
 #include "pthread.h"
 #include <cstring>
+
+
+extern pthread_t thread2;

@@ -272,9 +272,10 @@ void MotorCallback(char * buffer){
         }  
         else if (strcmp(buffer,"$10")==0){
 
+              //  pthread_join(thread2, NULL);
+              startReversing();
 
 
-            startReversing();
 
     }  
         

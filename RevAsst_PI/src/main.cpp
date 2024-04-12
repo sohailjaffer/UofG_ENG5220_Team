@@ -3,7 +3,11 @@
 #include "pi_bluetooth.h"
 #include "MotorController.h"
 #include "wifi_pi.h"
+#include "autoRevert.h"
+
 void* acoustic(void* arg);
+pthread_t thread1;
+pthread_t thread2;
 
 int main() {
 	
@@ -11,9 +15,11 @@ int main() {
 	
 	
 
-	pthread_t thread1, thread2;
+	
+
 
 	pthread_create(&thread1, NULL, ManageCarCommunication, NULL);
+	//pthread_create(&thread1, NULL, reverseThread, NULL);
 	//pthread_create(&thread2, NULL, ultSoundThread, NULL);
 
 

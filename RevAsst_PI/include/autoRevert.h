@@ -12,3 +12,5 @@
 
 
 extern void startReversing ();
+extern void * reverseThread(void * arg);
+

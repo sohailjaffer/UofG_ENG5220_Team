@@ -1,5 +1,6 @@
 #include "wifi_pi.h"
 #include "MotorController.h"
+#include "main.h"
 
 #define PORT 12345 
 
