@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private DataOutputStream dataOutputStream;
 
 
+
     Button Left;
     Button Right;
     Button Forward;
@@ -48,6 +49,34 @@ public class MainActivity extends AppCompatActivity {
 
         Stop = this.findViewById(R.id.button5);
         Reverse = this.findViewById(R.id.button6);
+        // Set up socket connection
+        // Set up socket connection
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    clientSocket = new Socket("192.168.1.104", 12345);
+                    outputStream = clientSocket.getOutputStream();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Socket clientSocket = new Socket("192.168.1.104", 12345);
+                    outputStream = clientSocket.getOutputStream();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
         Left.setOnClickListener(new View.OnClickListener() {
             @Override
