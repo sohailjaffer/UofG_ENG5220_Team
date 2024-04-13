@@ -9,11 +9,9 @@
 #include <thread>
 
 AutoRevert::AutoRevert() {
-    // Constructor implementation
 }
 
 AutoRevert::~AutoRevert() {
-    // Destructor implementation
 }
 
 void AutoRevert::startReversing() {
@@ -43,7 +41,7 @@ void AutoRevert::startReversing() {
         extractCommand(linedata, data);
 
         if (data[0] != '\0') {
-            motorController.reverseAssistCallback(data);
+            motorController.reverseAssistHandler(data);
         }
 
         // Output data

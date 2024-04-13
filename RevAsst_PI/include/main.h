@@ -8,3 +8,21 @@
 
 
 extern pthread_t thread2;
+
+extern bool frontFlag;
+extern bool backFlag;
+
+void* SensorReset(void* arg);
+void SensorCallback(int gpio);
+
+
+
+class Main {
+public:
+   
+private:
+
+    
+};
+
+

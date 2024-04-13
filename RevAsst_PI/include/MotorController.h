@@ -4,12 +4,14 @@
 #include <stdio.h>
 #include "pigpio.h"
 
+ // For forward and backward motor control for H bridge
 
 #define  input1     24
 #define  input2     23
 #define  speedA     12
 #define  buzzer     26
 
+ // For left and right motor control for H bridge
 #define  input3     25
 #define  input4     5
 #define  speedB     13
@@ -29,8 +31,9 @@ public:
         void resetMotors();
         void beep(int time);
         void terminateGPIO();
-        void motorCallback(char *buffer);
-        void reverseAssistCallback(char *buffer);
+        void motorHandler(char *buffer);
+        void reverseAssistHandler(char *buffer);
+
 
 private:
    

@@ -4,6 +4,8 @@
 #include "DataLogger.h"
 #include "autoRevert.h"
 
+
+
    
 int MotorController::gpioInit()
 {
@@ -201,7 +203,7 @@ void MotorController::backwardRight(int speed){
     
 }
 bool record=false;
-void MotorController::motorCallback(char * buffer){
+void MotorController::motorHandler(char * buffer){
 
 DataLogger datalogger;
 AutoRevert autorevert;
@@ -214,13 +216,16 @@ AutoRevert autorevert;
         if (strcmp(buffer, "$1") == 0) {
             // Handle $1 command (e.g., call forward(255))
              gpioInit();
-             backward(255);
+             if(!frontFlag)
+                 backward(255);
 
 
         } else if (strcmp(buffer, "$2") == 0) {
             // Handle $2 command (e.g., call backward(255))
             gpioInit();
-            forward(255);
+             if(!backFlag)
+
+                forward(255);
          
             //sleep(0.1);
            // wait(100);
@@ -238,27 +243,31 @@ AutoRevert autorevert;
         }else if (strcmp(buffer,"$5")==0){
 
             gpioInit();
-            backwardRight(255);
+            if(!frontFlag)
+              backwardRight(255);
 
 
         } 
         else if (strcmp(buffer,"$6")==0){
 
             gpioInit();
-            backwardLeft(255);
+            if(!frontFlag)
+             backwardLeft(255);
 
 
         } else if (strcmp(buffer,"$7")==0){
 
             gpioInit();
-            forwardRight(255);
+            if(!backFlag)
+                forwardRight(255);
 
 
         } 
         else if (strcmp(buffer,"$8")==0){
 
             gpioInit();
-            forwardLeft(255);
+            if(!backFlag)
+                forwardLeft(255);
 
 
         } 
@@ -303,13 +312,14 @@ AutoRevert autorevert;
 
             datalogger.WriteUserData(userLog);
         }
+       
 
         memset(buffer, 0, sizeof(buffer));
 }
 
 // this functions performs the opposite functions to that of MotorCallback 
 
-void MotorController::reverseAssistCallback(char * buffer){
+void MotorController::reverseAssistHandler(char * buffer){
 
         DataLogger datalogger;
 
@@ -380,3 +390,4 @@ void MotorController::reverseAssistCallback(char * buffer){
         }
 
 }
+
