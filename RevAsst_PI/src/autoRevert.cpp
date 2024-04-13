@@ -37,6 +37,8 @@ void extractCommand(const std::string& line, char* command) {
 
 void startReversing (){
 
+    MotorController motorController;
+
     // Get the user data stored in the txt file into the list
     std::vector<std::string> UserInputData = ReadUserData();
     auto starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -61,7 +63,7 @@ void startReversing (){
         extractCommand(linedata,data);
 
         if (data[0] != '\0') {
-            ReverseAssistCallback(data);
+            motorController.reverseAssistCallback(data);
         }
         
        

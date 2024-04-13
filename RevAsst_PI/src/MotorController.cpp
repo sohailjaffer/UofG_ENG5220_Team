@@ -4,29 +4,21 @@
 #include "DataLogger.h"
 #include "autoRevert.h"
 
-    int input1 = 24;
-    int input2 = 23;
-    int speedA = 12;
-    int buzzer = 26;
-
-    int input3 = 25;
-    int input4 = 5;
-    int speedB = 13;
-
-int gpio_init(void)
+   
+int MotorController::gpioInit()
 {
     if (gpioInitialise() < 0)
     {
-        std::cerr << "GPIO Initialization failed." << std::endl;
+        std::cerr << "PIGPIO Initialization failed." << std::endl;
         return 1;
     }
     return 0;
 }
 
-void test(int LED_PIN)
+void MotorController::test(int LED_PIN)
 {
 
-    gpio_init();
+    gpioInit();
 
     gpioSetMode(LED_PIN, PI_OUTPUT);
 
@@ -46,7 +38,7 @@ void test(int LED_PIN)
 
 
 
-void testHbridge(void){
+void MotorController::testHbridge(void){
  if (gpioInitialise() < 0) {
         // Initialization failed
         return;
@@ -94,7 +86,7 @@ void testHbridge(void){
 
 
 }
-void resetMotors(){
+void MotorController::resetMotors(){
 
     gpioWrite(input1, 0);  // Turn off input1
     gpioWrite(input2, 0);  // Turn off input2
@@ -107,7 +99,7 @@ void resetMotors(){
    // gpioTerminate();
 }
 
-void beep(int time){
+void MotorController::beep(int time){
   
      gpioSetMode(buzzer, PI_OUTPUT);
      gpioWrite(buzzer, 1);  // Turn off input1
@@ -121,11 +113,11 @@ void beep(int time){
 
 
 
-void terminateGPIO() {
+void MotorController::terminateGPIO() {
     gpioTerminate();
 }
 
-void setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed) {
+void MotorController::setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed) {
     gpioSetMode(input1Pin, PI_OUTPUT);
     gpioSetMode(input2Pin, PI_OUTPUT);
     gpioSetMode(speedPin, PI_OUTPUT);
@@ -135,11 +127,11 @@ void setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction
     gpioPWM(speedPin, speed);
 }
 
-void stopMotor(int speedPin) {
+void MotorController::stopMotor(int speedPin) {
     gpioPWM(speedPin, 0);  // Turn off the motor
 }
 
-void forward(int speed) {
+void MotorController::forward(int speed) {
     setMotorDirection(input1, input2, speedA, 1, speed);
     beep(0.1);
 
@@ -147,20 +139,20 @@ void forward(int speed) {
     stopMotor(speedA);
 }
 
-void backward(int speed) {
+void MotorController::backward(int speed) {
     setMotorDirection(input1, input2, speedA, 0, speed);
     usleep(100000);
     stopMotor(speedA);
 }
 
-void left(int speed) {
+void MotorController::left(int speed) {
     setMotorDirection(input3, input4, speedB, 0, speed);
 
     usleep(100000);
     stopMotor(speedB);
 }
 
-void right(int speed) {
+void MotorController::right(int speed) {
     setMotorDirection(input3, input4, speedB, 1, speed);
      usleep(100000);
      stopMotor(speedB);
@@ -168,7 +160,7 @@ void right(int speed) {
 
 }
 
-void forwardright(int speed){
+void MotorController::forwardRight(int speed){
 
         setMotorDirection(input1, input2, speedA, 1, speed);
         setMotorDirection(input3, input4, speedB, 1, speed);
@@ -180,7 +172,7 @@ void forwardright(int speed){
     
 }
 
-void forwardleft(int speed){
+void MotorController::forwardLeft(int speed){
         setMotorDirection(input1, input2, speedA, 1, speed);
         setMotorDirection(input3, input4, speedB, 0, speed);
         usleep(100000);
@@ -189,7 +181,7 @@ void forwardleft(int speed){
     
 }
 
-void backwardright(int speed){
+void MotorController::backwardRight(int speed){
         setMotorDirection(input1, input2, speedA, 0, speed);
         setMotorDirection(input3, input4, speedB, 1, speed);
         usleep(100000);
@@ -197,7 +189,7 @@ void backwardright(int speed){
         stopMotor(speedA);
 
     
-}void backwardleft(int speed){
+}void MotorController::backwardLeft(int speed){
 
         setMotorDirection(input1, input2, speedA, 0, speed);
         setMotorDirection(input3, input4, speedB, 0, speed);
@@ -209,7 +201,7 @@ void backwardright(int speed){
     
 }
 
-void MotorCallback(char * buffer){
+void MotorController::motorCallback(char * buffer){
 
 
 
@@ -219,52 +211,52 @@ void MotorCallback(char * buffer){
         // Compare the received command
         if (strcmp(buffer, "$1") == 0) {
             // Handle $1 command (e.g., call forward(255))
-             gpio_init();
+             gpioInit();
              backward(255);
 
 
         } else if (strcmp(buffer, "$2") == 0) {
             // Handle $2 command (e.g., call backward(255))
-            gpio_init();
+            gpioInit();
             forward(255);
          
             //sleep(0.1);
            // wait(100);
         } else if (strcmp(buffer, "$3") == 0) {
             // Handle $3 command (e.g., call left(255))
-            gpio_init();
+            gpioInit();
             left(255);
          
             //sleep(0.1);
             //wait(100);
         } else if (strcmp(buffer, "$4") == 0) {
-            gpio_init();
+            gpioInit();
             right(255);
      
         }else if (strcmp(buffer,"$5")==0){
 
-            gpio_init();
-            backwardright(255);
+            gpioInit();
+            backwardRight(255);
 
 
         } 
         else if (strcmp(buffer,"$6")==0){
 
-            gpio_init();
-            backwardleft(255);
+            gpioInit();
+            backwardLeft(255);
 
 
         } else if (strcmp(buffer,"$7")==0){
 
-            gpio_init();
-            forwardright(255);
+            gpioInit();
+            forwardRight(255);
 
 
         } 
         else if (strcmp(buffer,"$8")==0){
 
-            gpio_init();
-            forwardleft(255);
+            gpioInit();
+            forwardLeft(255);
 
 
         } 
@@ -304,21 +296,21 @@ void MotorCallback(char * buffer){
 
 // this functions performs the opposite functions to that of MotorCallback 
 
-void ReverseAssistCallback(char * buffer){
+void MotorController::reverseAssistCallback(char * buffer){
 
 
 
   
         if (strcmp(buffer, "$1") == 0) {
             // Handle $1 command (e.g., call forward(255))
-             gpio_init();
+             gpioInit();
             forward(255);
 
 
 
         } else if (strcmp(buffer, "$2") == 0) {
             // Handle $2 command (e.g., call backward(255))
-            gpio_init();
+            gpioInit();
             backward(255);
 
          
@@ -326,43 +318,43 @@ void ReverseAssistCallback(char * buffer){
            // wait(100);
         } else if (strcmp(buffer, "$3") == 0) {
             // Handle $3 command (e.g., call left(255))
-            gpio_init();
+            gpioInit();
             right(255);
 
          
             //sleep(0.1);
             //wait(100);
         } else if (strcmp(buffer, "$4") == 0) {
-            gpio_init();
+            gpioInit();
             left(255);
 
      
         }else if (strcmp(buffer,"$5")==0){
 
-            gpio_init();
-           forwardright(255);
+            gpioInit();
+           forwardRight(255);
 
 
 
         } 
         else if (strcmp(buffer,"$6")==0){
 
-            gpio_init();
-            forwardleft(255);
+            gpioInit();
+            forwardLeft(255);
 
 
 
         } else if (strcmp(buffer,"$7")==0){
 
-            gpio_init();
-            backwardright(255);
+            gpioInit();
+            backwardRight(255);
 
 
         } 
         else if (strcmp(buffer,"$8")==0){
 
-            gpio_init();
-            backwardleft(255);
+            gpioInit();
+            backwardLeft(255);
 
 
         } 

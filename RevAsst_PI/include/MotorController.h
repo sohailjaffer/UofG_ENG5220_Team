@@ -1,33 +1,45 @@
-#pragma once
+#ifndef MOTORCONTROLLER_H
+#define MOTORCONTROLLER_H
+
 #include <stdio.h>
 #include "pigpio.h"
 
 
-extern int gpio_init(void);
-extern void test(int LED_PIN);
-void testHbridge(void);
+#define  input1     24
+#define  input2     23
+#define  speedA     12
+#define  buzzer     26
+
+#define  input3     25
+#define  input4     5
+#define  speedB     13
+
+class MotorController {
+public:
 
 
-extern void forward(int speed);
-extern void backward(int speed);
-extern void right(int speed);
-extern void left(int speed);
+        void forward(int speed);
+        void backward(int speed);
+        void left(int speed);
+        void right(int speed);
+        void forwardRight(int speed);
+        void forwardLeft(int speed);
+        void backwardRight(int speed);
+        void backwardLeft(int speed);
+        void resetMotors();
+        void beep(int time);
+        void terminateGPIO();
+        void motorCallback(char *buffer);
+        void reverseAssistCallback(char *buffer);
 
+private:
+   
 
-extern void forwardright(int speed);
-extern void forwardleft(int speed);
-extern void backwardleft(int speed);
-extern void backwardright(int speed);
+        int gpioInit(void);
+        void test(int LED_PIN);
+        void testHbridge();
+        void setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed);
+        void stopMotor(int speedPin);
+    };
 
-extern void resetMotors();
-
-extern void beep(int time);
-
-void terminateGPIO();
-
-extern void MotorCallback(char * buffer);
-extern void ReverseAssistCallback(char * buffer);
-
-
-
-
+#endif // MOTORCONTROLLER_H
