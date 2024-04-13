@@ -1,16 +1,21 @@
 #pragma once
-#include "main.h"
-#include <iostream>
-#include <fstream>
-#include <ctime>
-#include <chrono>
 
-#include <sstream>
 #include <string>
-#include <cstring> // For strcpy
-#include <utility>
+#include <vector>
 
+class AutoRevert {
+public:
+    // Constructor and destructor
+    AutoRevert();
+    ~AutoRevert();
 
-extern void startReversing ();
-extern void * reverseThread(void * arg);
+    // Public member functions
+    void startReversing();
 
+    static void* reverseThread(void* arg);
+
+private:
+    // Private member functions
+    int getIntfromStr(const std::string& timestampString);
+    void extractCommand(const std::string& line, char* command);
+};

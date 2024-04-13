@@ -204,6 +204,7 @@ bool record=false;
 void MotorController::motorCallback(char * buffer){
 
 DataLogger datalogger;
+AutoRevert autorevert;
 
 
    // Print the received data
@@ -277,7 +278,7 @@ DataLogger datalogger;
               bool filefound = datalogger.fileExists("UserDataLog.txt");
               if(filefound){
                  std::cout << "Starting AutoRevert " << std::endl;
-              startReversing();
+              autorevert.startReversing();
               record =false;
               }else {
                  std::cout << "Cannot Reverse No Saved Data Available " << std::endl;
