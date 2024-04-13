@@ -200,9 +200,10 @@ void MotorController::backwardRight(int speed){
 
     
 }
-
+bool record=false;
 void MotorController::motorCallback(char * buffer){
 
+DataLogger datalogger;
 
 
    // Print the received data
@@ -262,16 +263,26 @@ void MotorController::motorCallback(char * buffer){
         } 
 
          else if (strcmp(buffer,"$9")==0){
-            deleteFile("UserDataLog.txt");
-            starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
-            std::chrono::high_resolution_clock::now().time_since_epoch());
+            datalogger.deleteFile("UserDataLog.txt");
+            datalogger.starttime= std::chrono::duration_cast<std::chrono::milliseconds>(
+    std::chrono::high_resolution_clock::now().time_since_epoch());
+            record = true;
+            
+
 
         }  
         else if (strcmp(buffer,"$10")==0){
 
               //  pthread_join(thread2, NULL);
+              bool filefound = datalogger.fileExists("UserDataLog.txt");
+              if(filefound){
+                 std::cout << "Starting AutoRevert " << std::endl;
               startReversing();
+              record =false;
+              }else {
+                 std::cout << "Cannot Reverse No Saved Data Available " << std::endl;
 
+              }
 
 
     }  
@@ -282,14 +293,15 @@ void MotorController::motorCallback(char * buffer){
             std::cout << "Unknown command: " << buffer << std::endl;
         }
 
-        LogEntry userLog;
+        if(record&&strcmp(buffer,"$10")!=0){
+            LogEntry userLog;
+            std::strcpy(userLog.buffer, buffer);
+            userLog.timestamp =  std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::high_resolution_clock::now().time_since_epoch()
+            );
 
-        std::strcpy(userLog.buffer, buffer);
-        userLog.timestamp =  std::chrono::duration_cast<std::chrono::milliseconds>(
-        std::chrono::high_resolution_clock::now().time_since_epoch()
-         );
-
-        WriteUserData(userLog);
+            datalogger.WriteUserData(userLog);
+        }
 
         memset(buffer, 0, sizeof(buffer));
 }
@@ -298,6 +310,7 @@ void MotorController::motorCallback(char * buffer){
 
 void MotorController::reverseAssistCallback(char * buffer){
 
+        DataLogger datalogger;
 
 
   

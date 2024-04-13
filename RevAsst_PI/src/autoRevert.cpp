@@ -38,9 +38,10 @@ void extractCommand(const std::string& line, char* command) {
 void startReversing (){
 
     MotorController motorController;
+    DataLogger datalogger;
 
     // Get the user data stored in the txt file into the list
-    std::vector<std::string> UserInputData = ReadUserData();
+    std::vector<std::string> UserInputData = datalogger.ReadUserData();
     auto starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
             std::chrono::high_resolution_clock::now().time_since_epoch());
     int prev_time=0;
@@ -75,7 +76,7 @@ void startReversing (){
 
 
     }
-    deleteFile("UserDataLog.txt");
+    datalogger.deleteFile("UserDataLog.txt");
 
 
 
