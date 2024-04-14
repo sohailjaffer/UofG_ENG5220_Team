@@ -9,6 +9,13 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Product assembly welding
    - Overall wiki website setup
    - C++ language programming
+   ### Sohail Jaffer (2946481j) Github - sohailjaffer
+   -Embedded C++ Development for Raspberry Pi
+   -Python Development for GUI using QT
+   -PCB Design 
+   -PCB Assembly 
+   -Component sourcing
+
 ## Overview
 
 This project implements a reverse assistance system for a car using ultrasonic sensors, a rotary encoder for wheel speed measurement, and a Raspberry Pi for control. The system records user inputs during forward movement and utilizes this data to assist the car in navigating backward in tight spaces.
