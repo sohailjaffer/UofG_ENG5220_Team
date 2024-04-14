@@ -191,9 +191,27 @@ void MotorController::stopMotor(int speedPin)
 #endif 
 }
 
+/**
+ * @brief This activates the H bridge which has 4 inputs. 
+ * input 1 and 2 are for Main motor 
+ * input 3 and 4 for steering motor. 
+ *                    H Bridge Control Table 
+ * ----------------------------------------------------------
+ *            Input1  Input2  Input3 Input4  Speed A   SpeedB
+ *   forward    1       0      0        0       1         0
+ *   Backwards  0       1      0        0       1         0
+ *   Right      0       0      1        0       0         1
+ *   Left       0       0      0        1       0         1
+ *   FWR        1       0      1        0       1         1  
+ *   FWL        1       0      0        1       1         1  
+ *   BWR        0       1      1        0       1         1  
+ *   BWL        0       1      0        1       1         1  
+ * ----------------------------------------------------------
+ * @param speed - The Duty cycle of the Motor for Motor Speed.
+*/ 
 void MotorController::forward(int speed)
 {
-    setMotorDirection(input1, input2, speedA, 1, speed);
+    setMotorDirection(input1, input2, speedA, 1, speed); 
     beep(0.1);
 
     usleep(100000); // Sleep for 1 second (in microseconds)
@@ -260,6 +278,27 @@ void MotorController::backwardLeft(int speed)
     stopMotor(speedA);
 }
 bool record = false;
+
+/**
+ * @brief This functions acts as a stub, which handles the request from the user and
+ * runs particular functions. Then the data along with timestamp is logged into a textfile to be used later.
+ * 
+ * @param buffer Contains the raw Data recieved by User via network sockets. 
+ * "$1": Moves the motor backward at full speed if the 'frontFlag' is not set.
+ * "$2": Moves the motor forward at full speed if the 'backFlag' is not set.
+ * "$3": Rotates the motor to the left at full speed.
+ * "$4": Rotates the motor to the right at full speed.
+ * "$5": Moves the motor diagonally backward-right at full speed if the 'frontFlag' is not set.
+ * "$6": Moves the motor diagonally backward-left at full speed if the 'frontFlag' is not set.
+ * "$7": Moves the motor diagonally forward-right at full speed if the 'backFlag' is not set.
+ * "$8": Moves the motor diagonally forward-left at full speed if the 'backFlag' is not set.
+ * "$9": Deletes the "UserDataLog.txt" file and starts recording user commands for logging.
+ * "$10": Checks if the "UserDataLog.txt" file exists, and if found, starts the AutoRevert process.
+ * 
+ * 
+ * 
+*/
+
 void MotorController::motorHandler(char *buffer)
 {
 
@@ -369,6 +408,26 @@ void MotorController::motorHandler(char *buffer)
 }
 
 // this functions performs the opposite functions to that of MotorCallback
+
+
+/**
+ * @brief This function 
+ * 
+ * @param buffer Contains the raw Data recieved by User via network sockets. 
+ * "$1": Moves the motor forward at full speed if the 'frontFlag' is not set.
+ * "$2": Moves the motor backward at full speed if the 'backFlag' is not set.
+ * "$3": Rotates the motor to the right at full speed.
+ * "$4": Rotates the motor to the left at full speed.
+ * "$5": Moves the motor diagonally forward-right at full speed if the 'frontFlag' is not set.
+ * "$6": Moves the motor diagonally forward-left at full speed if the 'frontFlag' is not set.
+ * "$7": Moves the motor diagonally backward-right at full speed if the 'backFlag' is not set.
+ * "$8": Moves the motor diagonally backward-left at full speed if the 'backFlag' is not set.
+ * "$9": Deletes the "UserDataLog.txt" file and starts recording user commands for logging.
+ * "$10": Checks if the "UserDataLog.txt" file exists, and if found, starts the AutoRevert process.
+ * 
+ * 
+ * 
+*/
 
 void MotorController::reverseAssistHandler(char *buffer)
 {

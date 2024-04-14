@@ -43,7 +43,7 @@ struct gpiod_chip *chip = gpiod_chip_open("/dev/gpiochip0");
     gpioSetMode(IRsensorGPIO, PI_INPUT);
     gpioSetPullUpDown(IRsensorGPIO, PI_PUD_UP); // Set pull-up resistor
 
-    gpioSetISRFuncEx(IRsensorGPIO, EITHER_EDGE, 0, sensorCallback, this);
+    gpioSetISRFuncEx(IRsensorGPIO, EITHER_EDGE, 20, sensorCallback, this); // Debounce set to 20ms 
 
 #endif
 }
@@ -54,10 +54,12 @@ IR_sensor::~IR_sensor() {
 #endif
 }
 
+// function to set the callback function of the IR sensor
+
 void IR_sensor::setCallbackFunction(std::function<void(int)> callback) {
     callbackFunction = callback;
 }
-
+// GPIO ISR callback function 
 void IR_sensor::sensorCallback(int gpio, int level, uint32_t tick, void* userData) {
     IR_sensor* sensor = static_cast<IR_sensor*>(userData);
 

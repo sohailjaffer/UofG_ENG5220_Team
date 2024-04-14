@@ -66,6 +66,13 @@ void WiFiPi::HelloPI() {
 void* WiFiPi::ManageCarCommunication(void* arg) {
     WiFiPi* wifiPi = static_cast<WiFiPi*>(arg);
 
+
+     /**
+      * Creates a Socket for the server to which the client connects, using
+      * the port number. IP is set to any to listen to the localhost IP address.
+      * 
+     */
+
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     struct sockaddr_in serverAddr;
     serverAddr.sin_family = AF_INET;
@@ -84,16 +91,16 @@ void* WiFiPi::ManageCarCommunication(void* arg) {
 
     while (true) {
 
-        if(threadKiller)
+        if(threadKiller)  // Kills the thread when the global bool is true. 
             break;
-        ssize_t bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
+        ssize_t bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0); 
 
         if (bytesRead <= 0) {
             std::cout << "Client disconnected." << std::endl;
             break;
         }
 
-        wifiPi->motorController.motorHandler(buffer);
+        wifiPi->motorController.motorHandler(buffer); // Raw Data is sent to the Motor Handler in diff class. 
     }
 
     close(clientSocket);

@@ -7,6 +7,7 @@ DataLogger::DataLogger() {
 void DataLogger::setStartTime(const std::chrono::milliseconds& time) {
     starttime = time;
 }
+ 
 void DataLogger::WriteUserData(LogEntry& entry) {
 
 
