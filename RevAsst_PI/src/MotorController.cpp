@@ -454,7 +454,7 @@ void MotorController::reverseAssistHandler(char *buffer)
     else if (strcmp(buffer, "$3") == 0)
     {
         gpioInit();
-        right(255);
+        left(255);
 
         // sleep(0.1);
         // wait(100);
@@ -462,7 +462,8 @@ void MotorController::reverseAssistHandler(char *buffer)
     else if (strcmp(buffer, "$4") == 0)
     {
         gpioInit();
-        left(255);
+        right(255);
+
     }
     else if (strcmp(buffer, "$5") == 0)
     {
