@@ -24,12 +24,16 @@ pthread_mutex_t backFlagMutex = PTHREAD_MUTEX_INITIALIZER;
 		 pthread_mutex_lock(&frontFlagMutex);
 		 frontFlag = true; // Reset frontFlag
 		 pthread_mutex_unlock(&frontFlagMutex);
+		 std::cout<<"Sensor Front Triggered"<<std::endl;
+		
 	 }
 	 else if (gpio == sensor2.getIRsensorGPIO())
 	 {
 		 pthread_mutex_lock(&backFlagMutex);
 		 backFlag = true; // Reset backFlag
 		 pthread_mutex_unlock(&backFlagMutex);
+		std::cout<<"Sensor Back Triggered"<<std::endl;
+
 	 }
  }
 
@@ -76,6 +80,8 @@ void* SensorReset(void* arg) {
 
 		sleep(3); // Periodic tiemer to reset the sensors flags
 		resetFlags();
+		if( threadKiller )
+			break;
 		
 	}
 
