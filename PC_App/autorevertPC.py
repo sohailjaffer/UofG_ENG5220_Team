@@ -26,6 +26,8 @@ class RobotControlApp(QWidget):
         left_button = QPushButton('Left', self)
         right_button = QPushButton('Right', self)
         terminate_button = QPushButton('Terminate Connection', self)
+        start_Rec_button = QPushButton('Start Recording', self)
+        autoRevert_button = QPushButton('AutoRevert', self)
 
         # Connect button signals to functions
         forward_button.clicked.connect(self.send_forward_command)
@@ -33,8 +35,9 @@ class RobotControlApp(QWidget):
         left_button.clicked.connect(self.send_left_command)
         right_button.clicked.connect(self.send_right_command)
         terminate_button.clicked.connect(self.terminate_connection)
+        start_Rec_button.clicked.connect(self.send_record_command)
+        autoRevert_button.clicked.connect(self.send_autoRevert_command)
 
-        # Create a label for status
         self.status_label = QLabel('Connection Status: Connected', self)
 
         # Set up the layout
@@ -44,6 +47,8 @@ class RobotControlApp(QWidget):
         layout.addWidget(left_button)
         layout.addWidget(right_button)
         layout.addWidget(terminate_button)
+        layout.addWidget(start_Rec_button)
+        layout.addWidget(autoRevert_button)
         layout.addWidget(self.status_label)
 
         self.setLayout(layout)
@@ -62,6 +67,7 @@ class RobotControlApp(QWidget):
 
     def send_right_command(self):
         self.send_command('$4')
+
 
     def terminate_connection(self):
         self.client_socket.close()
@@ -97,6 +103,11 @@ class RobotControlApp(QWidget):
             self.send_left_command()
         elif Qt.Key_Right in self.keys_pressed:
             self.send_right_command()
+    def send_record_command(self):
+        self.send_command('$9')
+    def send_autoRevert_command(self):
+        self.send_command('$10')
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
