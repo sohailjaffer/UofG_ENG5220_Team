@@ -26,7 +26,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
      
      
-   ## Muhammed Zeeshan Arif Mistry (2880044m) - [ "ZeeshanMistry"](https://github.com/ZeeshanMistry)
+   ## Muhammed Zeeshan Arif Mistry (2880044m) - [ ZeeshanMistry](https://github.com/ZeeshanMistry)
    - Implement multithreading functionalities to handle concurrent tasks.
    - Integrate interrupt handling mechanisms to respond to external events, such as obstacle detection.
    - Conduct unit testing and debugging to ensure software reliability and real-time responsiveness.
