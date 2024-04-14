@@ -15,6 +15,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - PCB Design 
    - PCB Assembly 
    - Component sourcing
+   - Github maintenance
 
 ## Overview
 
