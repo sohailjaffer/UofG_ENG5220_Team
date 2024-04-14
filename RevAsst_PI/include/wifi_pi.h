@@ -8,6 +8,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include "MotorController.h"
+#include "main.h"
 
 #define PORT  12345
 

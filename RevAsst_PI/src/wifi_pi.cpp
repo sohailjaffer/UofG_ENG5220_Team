@@ -83,6 +83,9 @@ void* WiFiPi::ManageCarCommunication(void* arg) {
     char buffer[1024] = {0};
 
     while (true) {
+
+        if(threadKiller)
+            break;
         ssize_t bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0);
 
         if (bytesRead <= 0) {
@@ -95,5 +98,6 @@ void* WiFiPi::ManageCarCommunication(void* arg) {
 
     close(clientSocket);
     close(serverSocket);
+    threadKiller= true;
     pthread_exit(NULL);
 }

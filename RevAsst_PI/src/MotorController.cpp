@@ -3,20 +3,37 @@
 #include "MotorController.h"
 #include "DataLogger.h"
 #include "autoRevert.h"
+#include <gpiod.h>
+
 
 int MotorController::gpioInit()
 {
-    if (gpioInitialise() < 0)
-    {
-        std::cerr << "PIGPIO Initialization failed." << std::endl;
-        return 1;
-    }
-    return 0;
+
+#ifdef USE_GPIOd
+
+     return 0;
+
+
+
+#else
+        if (gpioInitialise() < 0)
+        {
+            std::cerr << "PIGPIO Initialization failed." << std::endl;
+            return 1;
+        }
+        return 0;
+
+#endif
+
+
+
+
 }
 
 void MotorController::test(int LED_PIN)
 {
 
+#ifndef USE_GPIOd
     gpioInit();
 
     gpioSetMode(LED_PIN, PI_OUTPUT);
@@ -31,10 +48,13 @@ void MotorController::test(int LED_PIN)
     }
 
     gpioTerminate();
+#endif
 }
 
 void MotorController::testHbridge(void)
 {
+
+#ifndef USE_GPIOd
     if (gpioInitialise() < 0)
     {
         // Initialization failed
@@ -75,9 +95,13 @@ void MotorController::testHbridge(void)
     gpioPWM(speedB, 0);   // Turn off the motor
 
     gpioTerminate();
+
+#endif
 }
 void MotorController::resetMotors()
 {
+#ifndef USE_GPIOd
+
 
     gpioWrite(input1, 0); // Turn off input1
     gpioWrite(input2, 0); // Turn off input2
@@ -88,24 +112,64 @@ void MotorController::resetMotors()
     gpioPWM(speedB, 0);   // Turn off the motor
 
     // gpioTerminate();
+#endif
 }
 
 void MotorController::beep(int time)
 {
+#ifndef USE_GPIOd
 
     gpioSetMode(buzzer, PI_OUTPUT);
     gpioWrite(buzzer, 1); // Turn off input1
     sleep(time);
     gpioWrite(buzzer, 0); // Turn off input1
+#endif
 }
 
 void MotorController::terminateGPIO()
 {
+#ifndef USE_GPIOd
+
     gpioTerminate();
+#endif
 }
 
 void MotorController::setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed)
 {
+#ifdef USE_GPIOd
+
+    struct gpiod_chip *chip = gpiod_chip_open("/dev/gpiochip1");
+    if (!chip)
+    {
+        perror("GPIOchip0 failed\n");
+        return;
+    }
+
+    struct gpiod_line *line1 = gpiod_chip_get_line(chip, input1Pin);
+    struct gpiod_line *line2 = gpiod_chip_get_line(chip, input2Pin);
+    struct gpiod_line *lineSpeed = gpiod_chip_get_line(chip, speedPin);
+
+    gpiod_line_request_output(line1, "H-bridge1", 0);
+    gpiod_line_request_output(line2, "H-bridge2", 0);
+    gpiod_line_request_output(lineSpeed, "H-bridge-speed", 0);
+
+    gpiod_line_set_value(line1, direction);
+    gpiod_line_set_value(line2, !direction); // Invert direction
+
+    for (int i = 0; i < 10; ++i)
+    {
+        gpiod_line_set_value(lineSpeed, speed);
+        usleep(speed * 1000); 
+        gpiod_line_set_value(lineSpeed, !speed);
+        usleep((100 - speed) * 1000); 
+    }
+// reset the pins 
+    gpiod_line_release(line1);
+    gpiod_line_release(line2);
+    gpiod_line_release(lineSpeed);
+    gpiod_chip_close(chip);
+#else
+// --- PIGPIO CODE  -------------
     gpioSetMode(input1Pin, PI_OUTPUT);
     gpioSetMode(input2Pin, PI_OUTPUT);
     gpioSetMode(speedPin, PI_OUTPUT);
@@ -113,11 +177,18 @@ void MotorController::setMotorDirection(int input1Pin, int input2Pin, int speedP
     gpioWrite(input1Pin, direction);
     gpioWrite(input2Pin, !direction); // Invert direction
     gpioPWM(speedPin, speed);
+#endif
 }
+
+
+
 
 void MotorController::stopMotor(int speedPin)
 {
+#ifndef USE_GPIOd
+
     gpioPWM(speedPin, 0); // Turn off the motor
+#endif 
 }
 
 void MotorController::forward(int speed)
@@ -195,20 +266,15 @@ void MotorController::motorHandler(char *buffer)
     DataLogger datalogger;
     AutoRevert autorevert;
 
-    // Print the received data
-    // std::cout << "Received command: " << buffer << std::endl;
-
-    // Compare the received command
+   
     if (strcmp(buffer, "$1") == 0)
     {
-        // Handle $1 command (e.g., call forward(255))
         gpioInit();
         if (!frontFlag)
             backward(255);
     }
     else if (strcmp(buffer, "$2") == 0)
     {
-        // Handle $2 command (e.g., call backward(255))
         gpioInit();
         if (!backFlag)
 
@@ -219,7 +285,6 @@ void MotorController::motorHandler(char *buffer)
     }
     else if (strcmp(buffer, "$3") == 0)
     {
-        // Handle $3 command (e.g., call left(255))
         gpioInit();
         left(255);
 
@@ -312,7 +377,6 @@ void MotorController::reverseAssistHandler(char *buffer)
 
     if (strcmp(buffer, "$1") == 0)
     {
-        // Handle $1 command (e.g., call forward(255))
         gpioInit();
         if (!backFlag)
 
@@ -320,7 +384,6 @@ void MotorController::reverseAssistHandler(char *buffer)
     }
     else if (strcmp(buffer, "$2") == 0)
     {
-        // Handle $2 command (e.g., call backward(255))
         gpioInit();
         if (!frontFlag)
 
@@ -331,7 +394,6 @@ void MotorController::reverseAssistHandler(char *buffer)
     }
     else if (strcmp(buffer, "$3") == 0)
     {
-        // Handle $3 command (e.g., call left(255))
         gpioInit();
         right(255);
 

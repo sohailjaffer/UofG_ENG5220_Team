@@ -1,8 +1,11 @@
 #ifndef MOTORCONTROLLER_H
 #define MOTORCONTROLLER_H
 
+#undef USE_GPIOd 
+
 #include <stdio.h>
 #include "pigpio.h"
+#include "gpiod.h"
 
  // For forward and backward motor control for H bridge
 

@@ -41,7 +41,9 @@ void AutoRevert::startReversing() {
         extractCommand(linedata, data);
 
         if (data[0] != '\0') {
-            motorController.reverseAssistHandler(data);
+            for(int i=0;i<1;i++){
+                 motorController.reverseAssistHandler(data);
+            }
         }
 
         // Output data

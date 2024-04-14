@@ -11,6 +11,7 @@ extern pthread_t thread2;
 
 extern bool frontFlag;
 extern bool backFlag;
+extern bool threadKiller;
 
 void* SensorReset(void* arg);
 void SensorCallback(int gpio);
