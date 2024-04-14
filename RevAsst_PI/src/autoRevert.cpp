@@ -8,6 +8,8 @@
 #include <chrono>
 #include <thread>
 
+//.
+
 AutoRevert::AutoRevert()
 {
 }
@@ -50,6 +52,7 @@ void AutoRevert::startReversing()
             for (int i = 0; i < 1; i++)
             {
                 motorController.reverseAssistHandler(data);
+                usleep(100);
             }
         }
 

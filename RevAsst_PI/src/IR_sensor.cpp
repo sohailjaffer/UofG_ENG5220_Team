@@ -43,7 +43,7 @@ struct gpiod_chip *chip = gpiod_chip_open("/dev/gpiochip0");
     gpioSetMode(IRsensorGPIO, PI_INPUT);
     gpioSetPullUpDown(IRsensorGPIO, PI_PUD_UP); // Set pull-up resistor
 
-    gpioSetISRFuncEx(IRsensorGPIO, EITHER_EDGE, 20, sensorCallback, this); // Debounce set to 20ms 
+    gpioSetISRFuncEx(IRsensorGPIO, EITHER_EDGE, 0, sensorCallback, this); // Debounce set to 0ms 
 
 #endif
 }
