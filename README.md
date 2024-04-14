@@ -3,19 +3,32 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 # UofG_ENG5220_Team Reverse Assist Car Project
 
 ## Team Division of work among project teams
-   ### YuHsien Huang (2941001H)
-   - Android studio website coding
-   - UI interface settings
-   - Product assembly welding
-   - Overall wiki website setup
-   - C++ language programming
-## Sohail Jaffer (2946481j) Github - sohailjaffer
+
+   ## Sohail Jaffer (2946481j) Github - sohailjaffer
    - Embedded C++ Development for Raspberry Pi
    - Python Development for GUI using QT
    - PCB Design 
    - PCB Assembly 
    - Component sourcing
    - Github maintenance
+   - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
+   - 
+     
+   ## Muhammed Zeeshan Arif Mistry (2880044m) - [ "ZeeshanMistry"](https://github.com/ZeeshanMistry)
+   - Developed Android App 
+   - Design UI interface
+   - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
+   - Manage Social media pages
+   - Develop test plans and test cases
+   - 
+   ### YuHsien Huang (2941001H)
+   - Android studio website coding
+   - UI interface settings
+   - Product assembly welding
+   - Overall wiki website setup
+   - C++ language programming
+
+
 
 ## Overview
 
