@@ -4,11 +4,11 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 
 ## Team Division of work among project teams
    - YuHsien Huang (2941001H)
-     Android studio website coding
-     UI interface settings
-     Product assembly welding
-     Overall wiki website setup
-     C++ language programming
+   - Android studio website coding
+   - UI interface settings
+   - Product assembly welding
+   - Overall wiki website setup
+   - C++ language programming
 ## Overview
 
 This project implements a reverse assistance system for a car using ultrasonic sensors, a rotary encoder for wheel speed measurement, and a Raspberry Pi for control. The system records user inputs during forward movement and utilizes this data to assist the car in navigating backward in tight spaces.
