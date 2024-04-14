@@ -4,9 +4,21 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 
 ## Team Division of work among project teams
 
-   ## Sohail Jaffer (2946481j) Github - sohailjaffer
+   ## Sohail Jaffer (2946481J) Github - sohailjaffer
    - Embedded C++ Development for Raspberry Pi
+     - GPIO integration
+     - Network socket communication
+     - Multithreading using pthreads
+     - Interrupts and Callbacks
+     - Blocking I/O
+     - Thread synchronization
+     - Server and Client
+     - Stub handler for Server and Client
    - Python Development for GUI using QT
+   - Design and prototype the hardware components, including selecting appropriate sensors
+   - Checking the hardware components to ensure they meet specifications
+   - develop a project plan with clear milestones and deadlines.
+   - Allocate resources and assign tasks to team members based on their skills and expertise.
    - PCB Design 
    - PCB Assembly 
    - Component sourcing
