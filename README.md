@@ -9,12 +9,12 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Product assembly welding
    - Overall wiki website setup
    - C++ language programming
-   ### Sohail Jaffer (2946481j) Github - sohailjaffer
-   -Embedded C++ Development for Raspberry Pi
-   -Python Development for GUI using QT
-   -PCB Design 
-   -PCB Assembly 
-   -Component sourcing
+## Sohail Jaffer (2946481j) Github - sohailjaffer
+   - Embedded C++ Development for Raspberry Pi
+   - Python Development for GUI using QT
+   - PCB Design 
+   - PCB Assembly 
+   - Component sourcing
 
 ## Overview
 
