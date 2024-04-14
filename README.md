@@ -11,6 +11,10 @@ why do we need Auto Revert X ?
 
 The "Auto Revert X" project offers ease of control, enhanced safety with obstacle detection, efficient navigation with the ability to follow a path in reverse
 
+
+![WhatsApp Image 2024-04-14 at 9 30 25 PM](https://github.com/sohailjaffer/UofG_ENG5220_Team/assets/157168096/4381e930-c2af-47e7-abad-e128019e4615) Follow **[autorevertx](https://www.instagram.com/autorevertx?igsh=c2dwams5d3dtMXIx)** on Instagram for updates and behind-the-scenes content.
+
+
 ## Features
 - **Proximity Sensors:** Proximity sensors detect objects by emitting and sensing infrared radiation.
 - **Rotary Encoder:** Precise measurement of wheel speed for effective control.
@@ -91,4 +95,4 @@ The "Auto Revert X" project offers ease of control, enhanced safety with obstacl
 
 This project utilizes the following libraries and tools:
 
-- [pigpio](https://github.com/joan2937/pigpio): A library for the Raspberry Pi GPIO interface, used for controlling GPIO pins from Python.
+- [pigpio](https://github.com/joan2937/pigpio): A library for the Raspberry Pi GPIO interface, used for controlling GPIO pins.
