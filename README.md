@@ -4,7 +4,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 
 ## Team Division of work among project teams
 
-   ## Sohail Jaffer (2946481J) Github - sohailjaffer
+   ## Sohail Jaffer (2946481J) Github - [sohailjaffer](https://github.com/sohailjaffer)
    - Embedded C++ Development for Raspberry Pi
      - GPIO integration
      - Network socket communication
