@@ -17,7 +17,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    ## Muhammed Zeeshan Arif Mistry (2880044m) - [ "ZeeshanMistry"](https://github.com/ZeeshanMistry)
    - Developed Android App 
    - Design UI interface
-   - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
+   - Conduct unit testing and debugging to ensure software reliability and real-time responsiveness.
    - Manage Social media pages
    - Develop test plans and test cases
      
