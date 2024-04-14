@@ -1,20 +1,54 @@
 #include "main.h"
-#include "ultrasound_sensor.h"
-#include "pi_bluetooth.h"
 #include "MotorController.h"
 #include "wifi_pi.h"
-void* acoustic(void* arg);
+#include "autoRevert.h"
+#include "IR_sensor.h"
+
+static IR_sensor sensor(IRFrontSensor);
+static IR_sensor sensor2(IRBackSensor);
+pthread_t thread1;
+pthread_t thread2;
+ bool threadKiller = false;
+
+bool frontFlag=false;
+bool backFlag=false;
+
+pthread_mutex_t frontFlagMutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t backFlagMutex = PTHREAD_MUTEX_INITIALIZER;
+
+ 
+ void SensorCallback(int gpio){
+
+	 if (gpio == sensor.getIRsensorGPIO())
+	 {
+		 pthread_mutex_lock(&frontFlagMutex);
+		 frontFlag = true; // Reset frontFlag
+		 pthread_mutex_unlock(&frontFlagMutex);
+		 std::cout<<"Sensor Front Triggered"<<std::endl;
+		
+	 }
+	 else if (gpio == sensor2.getIRsensorGPIO())
+	 {
+		 pthread_mutex_lock(&backFlagMutex);
+		 backFlag = true; // Reset backFlag
+		 pthread_mutex_unlock(&backFlagMutex);
+		std::cout<<"Sensor Back Triggered"<<std::endl;
+
+	 }
+ }
+
+
+
 
 int main() {
 	
-	
-	
-	
+	WiFiPi wpi;
 
-	pthread_t thread1, thread2;
-
-	pthread_create(&thread1, NULL, ManageCarCommunication, NULL);
-	pthread_create(&thread2, NULL, ultSoundThread, NULL);
+	sensor.setCallbackFunction(SensorCallback);
+	sensor2.setCallbackFunction(SensorCallback);
+	 
+	pthread_create(&thread1, NULL, wpi.ManageCarCommunication, NULL);
+	pthread_create(&thread2, NULL, SensorReset, NULL);
 
 
     // Wait for threads to finish
@@ -22,27 +56,40 @@ int main() {
 	pthread_join(thread2, NULL);
 
 
-	//testHbridge();
-	//HelloPI();
-
-	//test(16);
-
-
-
-	// double output = ultrasound_distance(2,3);
-    // std::cout << "Distance : " << output << std::endl;
-		
- 
-}
-
-void* acoustic(void* arg) {
-   int i=0;
-	while(true){
-
-	  std::cout << "Thead2  : " << i << std::endl;
-		i++;
-		sleep(1);
+	while(1)
+	{
+		usleep(100000);
 
 	}
-    pthread_exit(NULL);
+
+ 
 }
+void resetFlags() {
+    //pthread_mutex_lock(&frontFlagMutex);
+    frontFlag = false;
+    //pthread_mutex_unlock(&frontFlagMutex);
+
+    //pthread_mutex_lock(&backFlagMutex);
+    backFlag = false;
+    //pthread_mutex_unlock(&backFlagMutex);
+}
+
+void* SensorReset(void* arg) {
+
+	while(true){
+
+		sleep(3); // Periodic tiemer to reset the sensors flags
+		resetFlags();
+		if( threadKiller )
+			break;
+		
+	}
+
+	pthread_exit(NULL);
+
+
+}
+
+
+
+

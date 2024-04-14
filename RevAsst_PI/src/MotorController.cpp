@@ -2,30 +2,39 @@
 #include "main.h"
 #include "MotorController.h"
 #include "DataLogger.h"
+#include "autoRevert.h"
+#include <gpiod.h>
 
-    int input1 = 24;
-    int input2 = 23;
-    int speedA = 12;
-    int buzzer = 26;
 
-    int input3 = 25;
-    int input4 = 5;
-    int speedB = 13;
-
-int gpio_init(void)
+int MotorController::gpioInit()
 {
-    if (gpioInitialise() < 0)
-    {
-        std::cerr << "GPIO Initialization failed." << std::endl;
-        return 1;
-    }
-    return 0;
+
+#ifdef USE_GPIOd
+
+     return 0;
+
+
+
+#else
+        if (gpioInitialise() < 0)
+        {
+            std::cerr << "PIGPIO Initialization failed." << std::endl;
+            return 1;
+        }
+        return 0;
+
+#endif
+
+
+
+
 }
 
-void test(int LED_PIN)
+void MotorController::test(int LED_PIN)
 {
 
-    gpio_init();
+#ifndef USE_GPIOd
+    gpioInit();
 
     gpioSetMode(LED_PIN, PI_OUTPUT);
 
@@ -38,245 +47,400 @@ void test(int LED_PIN)
         sleep(1);
     }
 
-
-
     gpioTerminate();
+#endif
 }
 
+void MotorController::testHbridge(void)
+{
 
-
-void testHbridge(void){
- if (gpioInitialise() < 0) {
+#ifndef USE_GPIOd
+    if (gpioInitialise() < 0)
+    {
         // Initialization failed
         return;
     }
-
 
     gpioSetMode(input1, PI_OUTPUT);
     gpioSetMode(input2, PI_OUTPUT);
     gpioSetMode(speedA, PI_OUTPUT);
     gpioSetMode(speedB, PI_OUTPUT);
 
-    gpioWrite(input1, 1);  // Set input1 to HIGH
-    gpioWrite(input2, 0);  // Set input2 to LOW
-    gpioPWM(speedA, 255);  // Set speedA to a value between 0 and 255
+    gpioWrite(input1, 1); // Set input1 to HIGH
+    gpioWrite(input2, 0); // Set input2 to LOW
+    gpioPWM(speedA, 255); // Set speedA to a value between 0 and 255
 
-
-    gpioWrite(input3, 1);  // Set input1 to HIGH
-    gpioWrite(input4, 0);  // Set input2 to LOW
-    gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
-
-
-     sleep(1);
-    
-    gpioWrite(input1, 0);  // Set input1 to HIGH
-    gpioWrite(input2, 1);  // Set input2 to LOW
-    gpioPWM(speedA, 255);  // Set speedA to a value between 0 and 255
-
-    gpioWrite(input3, 0);  // Set input1 to HIGH
-    gpioWrite(input4, 1);  // Set input2 to LOW
-    gpioPWM(speedB, 255);  // Set speedA to a value between 0 and 255
+    gpioWrite(input3, 1); // Set input1 to HIGH
+    gpioWrite(input4, 0); // Set input2 to LOW
+    gpioPWM(speedB, 255); // Set speedA to a value between 0 and 255
 
     sleep(1);
 
+    gpioWrite(input1, 0); // Set input1 to HIGH
+    gpioWrite(input2, 1); // Set input2 to LOW
+    gpioPWM(speedA, 255); // Set speedA to a value between 0 and 255
 
-    gpioWrite(input1, 0);  // Turn off input1
-    gpioWrite(input2, 0);  // Turn off input2
-    gpioPWM(speedA, 0);    // Turn off the motor
+    gpioWrite(input3, 0); // Set input1 to HIGH
+    gpioWrite(input4, 1); // Set input2 to LOW
+    gpioPWM(speedB, 255); // Set speedA to a value between 0 and 255
 
-    gpioWrite(input3, 0);  // Turn off input1
-    gpioWrite(input4, 0);  // Turn off input2
-    gpioPWM(speedB, 0);    // Turn off the motor
+    sleep(1);
+
+    gpioWrite(input1, 0); // Turn off input1
+    gpioWrite(input2, 0); // Turn off input2
+    gpioPWM(speedA, 0);   // Turn off the motor
+
+    gpioWrite(input3, 0); // Turn off input1
+    gpioWrite(input4, 0); // Turn off input2
+    gpioPWM(speedB, 0);   // Turn off the motor
 
     gpioTerminate();
 
-
-
+#endif
 }
-void resetMotors(){
-
-    gpioWrite(input1, 0);  // Turn off input1
-    gpioWrite(input2, 0);  // Turn off input2
-    gpioPWM(speedA, 0);    // Turn off the motor
-
-    gpioWrite(input3, 0);  // Turn off input1
-    gpioWrite(input4, 0);  // Turn off input2
-    gpioPWM(speedB, 0);    // Turn off the motor
-
-   // gpioTerminate();
-}
-
-void beep(int time){
-  
-     gpioSetMode(buzzer, PI_OUTPUT);
-     gpioWrite(buzzer, 1);  // Turn off input1
-     sleep(time);
-     gpioWrite(buzzer, 0);  // Turn off input1
+void MotorController::resetMotors()
+{
+#ifndef USE_GPIOd
 
 
+    gpioWrite(input1, 0); // Turn off input1
+    gpioWrite(input2, 0); // Turn off input2
+    gpioPWM(speedA, 0);   // Turn off the motor
+
+    gpioWrite(input3, 0); // Turn off input1
+    gpioWrite(input4, 0); // Turn off input2
+    gpioPWM(speedB, 0);   // Turn off the motor
+
+    // gpioTerminate();
+#endif
 }
 
+void MotorController::beep(int time)
+{
+#ifndef USE_GPIOd
 
+    gpioSetMode(buzzer, PI_OUTPUT);
+    gpioWrite(buzzer, 1); // Turn off input1
+    sleep(time);
+    gpioWrite(buzzer, 0); // Turn off input1
+#endif
+}
 
+void MotorController::terminateGPIO()
+{
+#ifndef USE_GPIOd
 
-
-void terminateGPIO() {
     gpioTerminate();
+#endif
 }
 
-void setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed) {
+void MotorController::setMotorDirection(int input1Pin, int input2Pin, int speedPin, int direction, int speed)
+{
+#ifdef USE_GPIOd
+
+    struct gpiod_chip *chip = gpiod_chip_open("/dev/gpiochip1");
+    if (!chip)
+    {
+        perror("GPIOchip0 failed\n");
+        return;
+    }
+
+    struct gpiod_line *line1 = gpiod_chip_get_line(chip, input1Pin);
+    struct gpiod_line *line2 = gpiod_chip_get_line(chip, input2Pin);
+    struct gpiod_line *lineSpeed = gpiod_chip_get_line(chip, speedPin);
+
+    gpiod_line_request_output(line1, "H-bridge1", 0);
+    gpiod_line_request_output(line2, "H-bridge2", 0);
+    gpiod_line_request_output(lineSpeed, "H-bridge-speed", 0);
+
+    gpiod_line_set_value(line1, direction);
+    gpiod_line_set_value(line2, !direction); // Invert direction
+
+    for (int i = 0; i < 10; ++i)
+    {
+        gpiod_line_set_value(lineSpeed, speed);
+        usleep(speed * 1000); 
+        gpiod_line_set_value(lineSpeed, !speed);
+        usleep((100 - speed) * 1000); 
+    }
+// reset the pins 
+    gpiod_line_release(line1);
+    gpiod_line_release(line2);
+    gpiod_line_release(lineSpeed);
+    gpiod_chip_close(chip);
+#else
+// --- PIGPIO CODE  -------------
     gpioSetMode(input1Pin, PI_OUTPUT);
     gpioSetMode(input2Pin, PI_OUTPUT);
     gpioSetMode(speedPin, PI_OUTPUT);
 
     gpioWrite(input1Pin, direction);
-    gpioWrite(input2Pin, !direction);  // Invert direction
+    gpioWrite(input2Pin, !direction); // Invert direction
     gpioPWM(speedPin, speed);
+#endif
 }
 
-void stopMotor(int speedPin) {
-    gpioPWM(speedPin, 0);  // Turn off the motor
+
+
+
+void MotorController::stopMotor(int speedPin)
+{
+#ifndef USE_GPIOd
+
+    gpioPWM(speedPin, 0); // Turn off the motor
+#endif 
 }
 
-void forward(int speed) {
+void MotorController::forward(int speed)
+{
     setMotorDirection(input1, input2, speedA, 1, speed);
     beep(0.1);
 
-    usleep(100000);  // Sleep for 1 second (in microseconds)
+    usleep(100000); // Sleep for 1 second (in microseconds)
     stopMotor(speedA);
 }
 
-void backward(int speed) {
+void MotorController::backward(int speed)
+{
     setMotorDirection(input1, input2, speedA, 0, speed);
     usleep(100000);
     stopMotor(speedA);
 }
 
-void left(int speed) {
+void MotorController::left(int speed)
+{
     setMotorDirection(input3, input4, speedB, 0, speed);
 
     usleep(100000);
     stopMotor(speedB);
 }
 
-void right(int speed) {
+void MotorController::right(int speed)
+{
     setMotorDirection(input3, input4, speedB, 1, speed);
-     usleep(100000);
-     stopMotor(speedB);
-   // testHbridge();
-
+    usleep(100000);
+    stopMotor(speedB);
+    // testHbridge();
 }
 
-void forwardright(int speed){
+void MotorController::forwardRight(int speed)
+{
 
-        setMotorDirection(input1, input2, speedA, 1, speed);
-        setMotorDirection(input3, input4, speedB, 1, speed);
-        usleep(100000);
-        stopMotor(speedB);
-        stopMotor(speedA);
-
-
-    
+    setMotorDirection(input1, input2, speedA, 1, speed);
+    setMotorDirection(input3, input4, speedB, 1, speed);
+    usleep(100000);
+    stopMotor(speedB);
+    stopMotor(speedA);
 }
 
-void forwardleft(int speed){
-        setMotorDirection(input1, input2, speedA, 1, speed);
-        setMotorDirection(input3, input4, speedB, 0, speed);
-        usleep(100000);
-        stopMotor(speedB);
-        stopMotor(speedA);
-    
+void MotorController::forwardLeft(int speed)
+{
+    setMotorDirection(input1, input2, speedA, 1, speed);
+    setMotorDirection(input3, input4, speedB, 0, speed);
+    usleep(100000);
+    stopMotor(speedB);
+    stopMotor(speedA);
 }
 
-void backwardright(int speed){
-        setMotorDirection(input1, input2, speedA, 0, speed);
-        setMotorDirection(input3, input4, speedB, 1, speed);
-        usleep(100000);
-        stopMotor(speedB);
-        stopMotor(speedA);
-
-    
-}void backwardleft(int speed){
-
-        setMotorDirection(input1, input2, speedA, 0, speed);
-        setMotorDirection(input3, input4, speedB, 0, speed);
-        usleep(100000);
-        stopMotor(speedB);
-        stopMotor(speedA);
-
-
-    
+void MotorController::backwardRight(int speed)
+{
+    setMotorDirection(input1, input2, speedA, 0, speed);
+    setMotorDirection(input3, input4, speedB, 1, speed);
+    usleep(100000);
+    stopMotor(speedB);
+    stopMotor(speedA);
 }
+void MotorController::backwardLeft(int speed)
+{
 
-void MotorCallback(char * buffer){
+    setMotorDirection(input1, input2, speedA, 0, speed);
+    setMotorDirection(input3, input4, speedB, 0, speed);
+    usleep(100000);
+    stopMotor(speedB);
+    stopMotor(speedA);
+}
+bool record = false;
+void MotorController::motorHandler(char *buffer)
+{
 
+    DataLogger datalogger;
+    AutoRevert autorevert;
 
-
-   // Print the received data
-       // std::cout << "Received command: " << buffer << std::endl;
-
-        // Compare the received command
-        if (strcmp(buffer, "$1") == 0) {
-            // Handle $1 command (e.g., call forward(255))
-             gpio_init();
-             forward(255);
-
-        } else if (strcmp(buffer, "$2") == 0) {
-            // Handle $2 command (e.g., call backward(255))
-            gpio_init();
+   
+    if (strcmp(buffer, "$1") == 0)
+    {
+        gpioInit();
+        if (!frontFlag)
             backward(255);
-         
-            //sleep(0.1);
-           // wait(100);
-        } else if (strcmp(buffer, "$3") == 0) {
-            // Handle $3 command (e.g., call left(255))
-            gpio_init();
-            left(255);
-         
-            //sleep(0.1);
-            //wait(100);
-        } else if (strcmp(buffer, "$4") == 0) {
-            gpio_init();
-            right(255);
-     
-        }else if (strcmp(buffer,"$5")==0){
+    }
+    else if (strcmp(buffer, "$2") == 0)
+    {
+        gpioInit();
+        if (!backFlag)
 
-            gpio_init();
-            forwardright(255);
+            forward(255);
 
-        } 
-        else if (strcmp(buffer,"$6")==0){
+        // sleep(0.1);
+        // wait(100);
+    }
+    else if (strcmp(buffer, "$3") == 0)
+    {
+        gpioInit();
+        left(255);
 
-            gpio_init();
-            forwardleft(255);
+        // sleep(0.1);
+        // wait(100);
+    }
+    else if (strcmp(buffer, "$4") == 0)
+    {
+        gpioInit();
+        right(255);
+    }
+    else if (strcmp(buffer, "$5") == 0)
+    {
 
-        } else if (strcmp(buffer,"$7")==0){
+        gpioInit();
+        if (!frontFlag)
+            backwardRight(255);
+    }
+    else if (strcmp(buffer, "$6") == 0)
+    {
 
-            gpio_init();
-            backwardright(255);
+        gpioInit();
+        if (!frontFlag)
+            backwardLeft(255);
+    }
+    else if (strcmp(buffer, "$7") == 0)
+    {
 
-        } 
-        else if (strcmp(buffer,"$8")==0){
+        gpioInit();
+        if (!backFlag)
+            forwardRight(255);
+    }
+    else if (strcmp(buffer, "$8") == 0)
+    {
 
-            gpio_init();
-            backwardleft(255);
+        gpioInit();
+        if (!backFlag)
+            forwardLeft(255);
+    }
 
-        } 
-        //test
-        
-        else {
-            // Unknown command
-            std::cout << "Unknown command: " << buffer << std::endl;
+    else if (strcmp(buffer, "$9") == 0)
+    {
+        datalogger.deleteFile("UserDataLog.txt");
+        datalogger.starttime = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::high_resolution_clock::now().time_since_epoch());
+        record = true;
+    }
+    else if (strcmp(buffer, "$10") == 0)
+    {
+
+        //  pthread_join(thread2, NULL);
+        bool filefound = datalogger.fileExists("UserDataLog.txt");
+        if (filefound)
+        {
+            std::cout << "Starting AutoRevert " << std::endl;
+            autorevert.startReversing();
+            record = false;
         }
+        else
+        {
+            std::cout << "Cannot Reverse No Saved Data Available " << std::endl;
+        }
+    }
 
+    else
+    {
+        // Unknown command
+        std::cout << "Unknown command: " << buffer << std::endl;
+    }
+
+    if (record && strcmp(buffer, "$10") != 0)
+    {
         LogEntry userLog;
-
         std::strcpy(userLog.buffer, buffer);
-        userLog.timestamp =  std::chrono::duration_cast<std::chrono::milliseconds>(
-        std::chrono::high_resolution_clock::now().time_since_epoch()
-    );
+        userLog.timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(
+            std::chrono::high_resolution_clock::now().time_since_epoch());
 
-        WriteUserData(userLog);
+        datalogger.WriteUserData(userLog);
+    }
 
-        memset(buffer, 0, sizeof(buffer));
+    memset(buffer, 0, sizeof(buffer));
+}
+
+// this functions performs the opposite functions to that of MotorCallback
+
+void MotorController::reverseAssistHandler(char *buffer)
+{
+
+    DataLogger datalogger;
+
+    if (strcmp(buffer, "$1") == 0)
+    {
+        gpioInit();
+        if (!backFlag)
+
+            forward(255);
+    }
+    else if (strcmp(buffer, "$2") == 0)
+    {
+        gpioInit();
+        if (!frontFlag)
+
+            backward(255);
+
+        // sleep(0.1);
+        // wait(100);
+    }
+    else if (strcmp(buffer, "$3") == 0)
+    {
+        gpioInit();
+        right(255);
+
+        // sleep(0.1);
+        // wait(100);
+    }
+    else if (strcmp(buffer, "$4") == 0)
+    {
+        gpioInit();
+        left(255);
+    }
+    else if (strcmp(buffer, "$5") == 0)
+    {
+
+        gpioInit();
+        if (!backFlag)
+
+            forwardRight(255);
+    }
+    else if (strcmp(buffer, "$6") == 0)
+    {
+
+        gpioInit();
+        if (!backFlag)
+
+            forwardLeft(255);
+    }
+    else if (strcmp(buffer, "$7") == 0)
+    {
+
+        gpioInit();
+        if (!frontFlag)
+
+            backwardRight(255);
+    }
+    else if (strcmp(buffer, "$8") == 0)
+    {
+
+        gpioInit();
+        if (!frontFlag)
+
+            backwardLeft(255);
+    }
+
+    else
+    {
+        // Unknown command
+        std::cout << "Unknown command: " << buffer << std::endl;
+    }
 }
