@@ -12,7 +12,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Component sourcing
    - Github maintenance
    - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
-   - 
+     
      
    ## Muhammed Zeeshan Arif Mistry (2880044m) - [ "ZeeshanMistry"](https://github.com/ZeeshanMistry)
    - Developed Android App 
@@ -20,7 +20,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
    - Manage Social media pages
    - Develop test plans and test cases
-   - 
+     
    ### YuHsien Huang (2941001H)
    - Android studio website coding
    - UI interface settings
