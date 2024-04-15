@@ -42,6 +42,13 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Overall wiki website setup
    - C++ language programming
 
+   ## Ignatius Idro Opi (2805170o) - [ignatiusopi](https://github.com/ignatiusopi)
+   -Electronic Schematic Development
+   -PCB Design and Fabrication
+   -Component Assembly and Testing
+   -Multithreading testing
+   -Sensor initialisation & configuration
+
 
 
 ## Overview
