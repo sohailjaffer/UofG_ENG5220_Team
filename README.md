@@ -53,7 +53,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 
 ## Overview
 
-Auto Revert X is a project featuring a remote control car outfitted with a PCB housing a Raspberry Pi 4, battery, IR sensors, and various electrical components. When directional commands (forward, left, right) are issued via software, the car moves accordingly. Upon activating the reverse button in the software, the car retraces its path in reverse, navigating the same route it initially followed.
+Auto Revert X is a project featuring a remote control car outfitted with a PCB housing a Raspberry Pi 3B, battery, IR sensors, and various electrical components. When directional commands (forward, left, right) are issued via software, the car moves accordingly. Upon activating the reverse button in the software, the car retraces its path in reverse, navigating the same route it initially followed.
 
 why do we need Auto Revert X ?
 
@@ -62,6 +62,8 @@ why do we need Auto Revert X ?
 2.Safety: The inclusion of IR sensors enhances safety by detecting obstacles and avoiding collisions during operation.
 
 3.Convenience: Remote control via software provides convenience, allowing users to maneuver the car from a distance without direct physical interaction.
+
+or some people are just bad at reversing  
 
 
 
