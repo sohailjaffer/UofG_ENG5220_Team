@@ -28,8 +28,11 @@ void AutoRevert::startReversing()
     auto startTime = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::high_resolution_clock::now().time_since_epoch());
     int prevTime = 0;
-    for (auto &line : userInputData)
+
+    // Iterate over the lines in reverse order
+    for (auto it = userInputData.rbegin(); it != userInputData.rend(); ++it)
     {
+        std::string& line = *it;
         std::stringstream ss(line);
         std::string timestamp, linedata;
         std::getline(ss, timestamp, ','); // extract the time for each input
@@ -61,6 +64,7 @@ void AutoRevert::startReversing()
     }
     dataLogger.deleteFile("UserDataLog.txt");
 }
+
 
 void *AutoRevert::reverseThread(void *arg)
 {
