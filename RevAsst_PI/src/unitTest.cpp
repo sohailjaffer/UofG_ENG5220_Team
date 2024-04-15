@@ -1,6 +1,5 @@
-#undef UnitTest
+#ifndef SKIP_UNIT_TESTS 
 
-#ifdef UnitTest
 #include <gtest/gtest.h>
 #include "MotorController.h"
 
@@ -25,7 +24,7 @@ TEST_F(SetMotorDirectionTest, BackwardDirectionTest) {
     int input2Pin = 23;
     int speedAPin = 12;
     int direction = 0; // Backward direction
-    int speed =50;
+    int speed = 50;
     motorController.setMotorDirection(input1Pin, input2Pin, speedAPin, direction, speed);
     // Add assertions
 }
@@ -34,4 +33,5 @@ int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
 }
+
 #endif 
