@@ -36,7 +36,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Manage Github 
    - Develop test plans and test cases
      
-   ### YuHsien Huang (2941001H)
+   ### YuHsien Huang (2941001H) - [YuhsienHuann](https://github.com/TWKevinHaung)
    - Android App Development 
    - UI interface settings
    - PCB assembly including soldering 
