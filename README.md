@@ -36,11 +36,11 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Develop test plans and test cases
      
    ### YuHsien Huang (2941001H)
-   - Android studio website coding
+   - Android App Development 
    - UI interface settings
-   - Product assembly welding
+   - PCB assembly including soldering 
    - Overall wiki website setup
-   - C++ language programming
+   - C++ Development 
 
    ## Ignatius Idro Opi (2805170o) - [ignatiusopi](https://github.com/ignatiusopi)
    - Electronic Schematic Development
