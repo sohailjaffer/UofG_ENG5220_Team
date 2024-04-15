@@ -33,6 +33,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Developed Android App
    - Design UI interface
    - Manage Social media pages
+   - Manage Github 
    - Develop test plans and test cases
      
    ### YuHsien Huang (2941001H)
