@@ -137,7 +137,44 @@ The "Auto Revert X" project offers ease of control, enhanced safety with obstacl
 
 ---
 
+## Build Instructions for Python Software
 
+To build the software and run the Robot Control application from the provided GitHub repository, follow these instructions:
+
+1. **Clone the Repository:**
+   You can clone the repository using the following command:
+   ```
+   git clone https://github.com/sohailjaffer/UofG_ENG5220_Team.git
+   ```
+
+2. **Navigate to the Project Directory:**
+   ```
+   cd UofG_ENG5220_Team/PC_App
+   ```
+
+3. **Install Dependencies:**
+   Ensure that you have all the necessary dependencies installed. For Python-based applications, you may need to install PyQt5. You can install it using pip:
+   ```
+   pip install PyQt5
+   ```
+
+4. **Run the Application:**
+   Execute the Python script to run the Robot Control application:
+   ```
+   python3 robot_control.py
+   ```
+
+5. **Interact with the Application:**
+   Once the application window opens, you can use the buttons to control the robot. Press the buttons for Forward, Backward, Left, Right, Terminate Connection, Start Recording, and AutoRevert to send commands to the robot via the established socket connection.
+
+6. **Terminate the Connection:**
+   To terminate the connection with the robot, click the "Terminate Connection" button.
+
+7. **Close the Application:**
+   Close the application window when finished controlling the robot.
+
+
+Ensure that you have Python installed on your system, along with the necessary libraries mentioned in the `robot_control.py` script.
 
 
 
