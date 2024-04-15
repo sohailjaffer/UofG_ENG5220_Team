@@ -1,5 +1,5 @@
 Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2IzMGc=
-
+https://www.notion.so/5d96ad462e65456998ebed42c4b62a22?v=ffb782b28924440680d9ac9bcb223597&pvs=4
 # UofG_ENG5220_Team Reverse Assist Car Project
 
 ## Team Division of work among project teams
