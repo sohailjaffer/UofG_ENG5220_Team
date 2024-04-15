@@ -65,7 +65,7 @@ why do we need Auto Revert X ?
 3.Convenience: Remote control via software provides convenience, allowing users to maneuver the car from a distance without direct physical interaction.
 
 or some people are just bad at reversing  
-
+Auto Revert X help users who may struggle with the task of reversing a vehicle manually. By automating this process, the project simplifies car navigation for individuals of all skill levels, making it accessible and user-friendly.
 
 
 The "Auto Revert X" project offers ease of control, enhanced safety with obstacle detection, efficient navigation with the ability to follow a path in reverse
