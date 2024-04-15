@@ -4,7 +4,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
 
 ## Team Division of work among project teams
 
-   ## Sohail Jaffer (2946481J) Github - [sohailjaffer](https://github.com/sohailjaffer)
+   ### Sohail Jaffer (2946481J) Github - [sohailjaffer](https://github.com/sohailjaffer)
    - Embedded C++ Development for Raspberry Pi
      - GPIO integration
      - Network socket communication
@@ -26,7 +26,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - debugging and troubleshooting issues related to hardware-software integration and real-time constraints.
      
      
-   ## Muhammed Zeeshan Arif Mistry (2880044m) - [ ZeeshanMistry](https://github.com/ZeeshanMistry)
+   ### Muhammed Zeeshan Arif Mistry (2880044m) - [ ZeeshanMistry](https://github.com/ZeeshanMistry)
    - Implement multithreading functionalities to handle concurrent tasks.
    - Integrate interrupt handling mechanisms to respond to external events, such as obstacle detection.
    - Conduct unit testing and debugging to ensure software reliability and real-time responsiveness.
@@ -42,7 +42,7 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - Overall wiki website setup
    - C++ Development 
 
-   ## Ignatius Idro Opi (2805170o) - [ignatiusopi](https://github.com/ignatiusopi)
+   ### Ignatius Idro Opi (2805170o) - [ignatiusopi](https://github.com/ignatiusopi)
    - Electronic Schematic Development
    - PCB Design and Fabrication
    - Component Assembly and Testing
