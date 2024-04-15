@@ -1,5 +1,4 @@
-Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2IzMGc=
-https://www.notion.so/5d96ad462e65456998ebed42c4b62a22?v=ffb782b28924440680d9ac9bcb223597&pvs=4
+
 # UofG_ENG5220_Team Reverse Assist Car Project
 
 ## Team Division of work among project teams
@@ -188,12 +187,11 @@ Replace `YOUR_IP_ADDRESS_HERE` with the actual IP address of your Raspberry Pi. 
 Ensure that you have Python installed on your system, along with the necessary libraries mentioned in the `robot_control.py` script.
 
 
+## Connect with us
 
-
-
-
-
-
+- Instagram: [AutoRevertX](https://www.instagram.com/autorevertx?igsh=emI1YWtha2IzMGc=)
+- Notion: [Project Documentation](https://www.notion.so/5d96ad462e65456998ebed42c4b62a22?v=ffb782b28924440680d9ac9bcb223597&pvs=4)
+- Youtube: [Explanation](https://www.youtube.com/channel/UCore7Hp1O_CoWI1DSHmuozg)
 
 
 
