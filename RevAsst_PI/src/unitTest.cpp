@@ -1,7 +1,9 @@
-#ifndef SKIP_UNIT_TESTS 
 
-#include <gtest/gtest.h>
 #include "MotorController.h"
+
+#ifdef unittest
+#include <gtest/gtest.h>
+
 
 class SetMotorDirectionTest : public ::testing::Test {
 protected:

@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
+//#include <gtest/gtest.h>
 #include "MotorController.h"
+
 
 class SetMotorDirectionTest : public ::testing::Test {
 protected:
