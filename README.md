@@ -163,14 +163,21 @@ To build the software and run the Robot Control application from the provided Gi
    ```
    python3 robot_control.py
    ```
+5. **Insert IP address**   To insert the IP address into the code, you need to replace the placeholder `'192.168.1.185'` with the actual IP address of your Raspberry Pi. Here's the command to do that using a text editor like `sed`:
 
-5. **Interact with the Application:**
+```bash
+sed -i 's/192.168.1.185/YOUR_IP_ADDRESS_HERE/g' robot_control.py
+```
+
+Replace `YOUR_IP_ADDRESS_HERE` with the actual IP address of your Raspberry Pi. This command will replace all occurrences of `'192.168.1.185'` in the `robot_control.py` file with your specified IP address.
+
+6. **Interact with the Application:**
    Once the application window opens, you can use the buttons to control the robot. Press the buttons for Forward, Backward, Left, Right, Terminate Connection, Start Recording, and AutoRevert to send commands to the robot via the established socket connection.
 
-6. **Terminate the Connection:**
+7. **Terminate the Connection:**
    To terminate the connection with the robot, click the "Terminate Connection" button.
 
-7. **Close the Application:**
+8. **Close the Application:**
    Close the application window when finished controlling the robot.
 
 
