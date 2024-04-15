@@ -29,21 +29,35 @@ void AutoRevert::startReversing()
         std::chrono::high_resolution_clock::now().time_since_epoch());
     int prevTime = 0;
 
-    // Iterate over the lines in reverse order
-    for (auto it = userInputData.rbegin(); it != userInputData.rend(); ++it)
+    // Extract timestamps and data into separate vectors
+    std::vector<std::string> timestamps;
+    std::vector<std::string> dataLines;
+    for (const auto& line : userInputData)
     {
-        std::string& line = *it;
         std::stringstream ss(line);
         std::string timestamp, linedata;
         std::getline(ss, timestamp, ','); // extract the time for each input
         std::getline(ss, linedata, ',');  // extract the data for each input
+
+        timestamps.push_back(timestamp);
+        dataLines.push_back(linedata);
+    }
+
+    // Reverse the order of dataLines while keeping timestamps unchanged
+    std::vector<std::string> reversedDataLines(dataLines.rbegin(), dataLines.rend());
+
+    // Iterate over the reversed data
+    for (size_t i = 0; i < reversedDataLines.size(); ++i)
+    {
+        const std::string& linedata = reversedDataLines[i];
+        const std::string& timestamp = timestamps[i];
 
         int delay = getIntfromStr(timestamp);
 
         if (delay > 0)
         {
             // Sleep for the calculated duration
-            std::this_thread::sleep_for(std::chrono::milliseconds(delay - prevTime));
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));  //delay - prevTime
         }
         prevTime = delay;
         char data[100];
@@ -64,6 +78,8 @@ void AutoRevert::startReversing()
     }
     dataLogger.deleteFile("UserDataLog.txt");
 }
+
+
 
 
 void *AutoRevert::reverseThread(void *arg)
