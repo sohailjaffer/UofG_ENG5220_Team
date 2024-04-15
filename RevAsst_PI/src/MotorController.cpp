@@ -379,7 +379,11 @@ void MotorController::motorHandler(char *buffer)
         if (filefound)
         {
             std::cout << "Starting AutoRevert " << std::endl;
-            autorevert.startReversing();
+            pthread_create(&Revthread, NULL, autorevert.reverseThread, NULL);
+            pthread_join(Revthread, NULL);
+
+            //autorevert.startReversing();
+
             record = false;
         }
         else

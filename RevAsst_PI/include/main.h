@@ -7,7 +7,8 @@
 #include <cstring>
 
 
-extern pthread_t thread2;
+extern pthread_t Revthread;
+
 
 extern bool frontFlag;
 extern bool backFlag;

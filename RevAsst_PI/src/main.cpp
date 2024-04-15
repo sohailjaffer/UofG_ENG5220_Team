@@ -8,6 +8,7 @@ static IR_sensor sensor(IRFrontSensor);
 static IR_sensor sensor2(IRBackSensor);
 pthread_t thread1;
 pthread_t thread2;
+pthread_t Revthread;
  bool threadKiller = false;
 
 bool frontFlag=false;

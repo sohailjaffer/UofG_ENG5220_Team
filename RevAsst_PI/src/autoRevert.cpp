@@ -50,7 +50,7 @@ void AutoRevert::startReversing()
             for (int i = 0; i < 1; i++)
             {
                 motorController.reverseAssistHandler(data);
-                usleep(100);
+                //usleep(100);
             }
         }
 
