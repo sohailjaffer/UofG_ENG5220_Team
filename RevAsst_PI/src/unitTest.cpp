@@ -1,3 +1,4 @@
+#undef UnitTest
 
 #ifdef UnitTest
 #include <gtest/gtest.h>
