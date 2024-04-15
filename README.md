@@ -41,7 +41,10 @@ Follow us on Instagram : https://www.instagram.com/autorevertx?igsh=emI1YWtha2Iz
    - UI interface settings
    - PCB assembly including soldering 
    - Overall wiki website setup
-   - C++ Development 
+   - C++ Development
+   - Manage Github
+   - Confirmation of parts and search for materials
+   - Parts assembly testing
 
    ### Ignatius Idro Opi (2805170o) - [ignatiusopi](https://github.com/ignatiusopi)
    - Electronic Schematic Development
