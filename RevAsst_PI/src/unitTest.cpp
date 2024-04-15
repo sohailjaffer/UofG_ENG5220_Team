@@ -11,7 +11,7 @@ TEST_F(SetMotorDirectionTest, ForwardDirectionTest) {
     int input2Pin = 23;
     int speedAPin = 12;
     int direction = 1; // Forward direction
-    int speed = 50;
+    int speed = /* your desired speed */;
     
     motorController.setMotorDirection(input1Pin, input2Pin, speedAPin, direction, speed);
     // Add assertions
@@ -22,9 +22,10 @@ TEST_F(SetMotorDirectionTest, BackwardDirectionTest) {
     int input2Pin = 23;
     int speedAPin = 12;
     int direction = 0; // Backward direction
-    int speed = 50;
+    int speed = /* your desired speed */;
     
     motorController.setMotorDirection(input1Pin, input2Pin, speedAPin, direction, speed);
+    // Add assertions
 }
 
 int main(int argc, char **argv) {
