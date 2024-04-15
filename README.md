@@ -198,5 +198,9 @@ Ensure that you have Python installed on your system, along with the necessary l
 
 This project utilizes the following libraries and tools:
 
+- [realtime_cpp_coding](https://github.com/berndporr/realtime_cpp_coding) repository by Bernd Porr. The repository provides valuable resources for real-time C++ programming.
+
 - [pigpio](https://github.com/joan2937/pigpio): A library for the Raspberry Pi GPIO interface, used for controlling GPIO pins.
+
+- [sockets-ccpp-rpi](https://github.com/Mad-Scientist-Monkey/sockets-ccpp-rpi) repository by Mad-Scientist-Monkey for socket communication between C++ programs on Raspberry Pi 3B.
 
