@@ -102,7 +102,7 @@ The "Auto Revert X" project offers ease of control, enhanced safety with obstacl
 
 ---
 
-## Build Instructions
+## Build Instructions for Raspberry Pi
 
 1. **Clone the repository to your local machine:**
    ```bash
